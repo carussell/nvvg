@@ -55,6 +55,9 @@ namespace ObjectTypes
     WATER,
     SILO,
     WINDMILL
+    BUZZEDSILO,
+    EXPLODINGSILO,
+    GHOSTSILO
   };
 };
 
