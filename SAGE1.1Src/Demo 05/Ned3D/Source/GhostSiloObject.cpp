@@ -39,5 +39,6 @@ GhostSiloObject::GhostSiloObject(Model *m)
 
 void GhostSiloObject::kill(void)
 {
+  this->killObject();
 }
 
