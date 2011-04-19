@@ -31,7 +31,8 @@
 #ifndef __EXPLODINGSILOOBJECT_H_INCLUDED__
 #define __EXPLODINGSILOOBJECT_H_INCLUDED__
 
-#include "Objects/SiloObject.h"
+#include "SiloObject.h"
+#include "ObjectTypes.h"
 
 class ExplodingSiloObject : public SiloObject
 {

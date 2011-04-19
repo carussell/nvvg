@@ -30,6 +30,7 @@
 
 #include "ExplodingSiloObject.h"
 
+
 ExplodingSiloObject::ExplodingSiloObject(Model *m)
   : SiloObject(m)
 {

@@ -50,6 +50,9 @@ class SiloObject;
 class WindmillObject;
 class Terrain;
 class Water;
+class ExplodingSiloObject;
+class BuzzedSiloObject;
+class GhostSiloObject;
 
 /// \brief Derived object manager to handle Ned3D objects specifically.
 class Ned3DObjectManager : public GameObjectManager
@@ -133,6 +136,11 @@ class Ned3DObjectManager : public GameObjectManager
     virtual void deleteObject(GameObject *object);
 
   protected:
+	  /** new code **/
+	  bool interactPlaneGhostSilo(PlaneObject &plane, SiloObject &ghostSilo);
+	  bool interactPlaneBuzzedSilo(PlaneObject &plane, SiloObject &buzzedSilo);
+	  bool interactPlaneExplodingSilo(PlaneObject &plane, SiloObject &explodingSilo);
+	  bool interactBulletExplodingSilo(SiloObject &badSilo, BulletObject &bullet);
     bool interactPlaneCrow(PlaneObject &plane, CrowObject &crow); ///< Handles plane-crow interactions, such as collision
     bool interactPlaneTerrain(PlaneObject &plane, TerrainObject &terrain); ///< Handles possible plane-terrain collision
     bool interactPlaneWater(PlaneObject &plane, WaterObject &water); ///< Handles possible plane-water collision
@@ -159,6 +167,9 @@ class Ned3DObjectManager : public GameObjectManager
     PlaneObject *m_plane;  ///> Points to the sole plane object.
     ObjectSet m_crows;     ///> Tracks the evil crows
     ObjectSet m_bullets;   ///> Tracks bullets
+	ObjectSet m_explodingSilos;
+	ObjectSet m_buzzedSilos;
+	ObjectSet m_ghostSilos;
     TerrainObject *m_terrain; ///> Points to the sole terrain object.  (not owned)
     WaterObject *m_water; ///> Points to the sole water object.  (not owned)
     ObjectSet m_furniture; ///> Silos, windmills, etc.

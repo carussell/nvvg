@@ -141,6 +141,12 @@ bool Game::initiate()
   objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 100.0f));
   objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 100.0f));
   objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 100.0f));
+  objects->spawnSilo(LocationOnterrain(-30.0f, 10.0f, 120.0f));
+  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 120.0f));
+  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 120.0f));
+  objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 120.0f));
+  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 140.0f));
+  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 140.0f));
 
   // Load windmill
   unsigned int windmillID = objects->spawnWindmill(LocationOnterrain(60.0f, 0.0f, 100.0f));

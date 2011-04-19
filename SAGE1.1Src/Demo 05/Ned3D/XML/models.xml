@@ -33,49 +33,40 @@
 	<model name="Silo1">
 		<frame fileName="cylo1.s3d" />
 	</model>
-	<model name="Silo2">
-		<frame fileName="cylo2.s3d" />
-	</model>
-	<model name="Silo3">
-		<frame fileName="cylo3.s3d" />
-	</model>
-	<model name="Silo4">
-		<frame fileName="cylo4.s3d" />
-	</model>
-  <model name="ExplodingSilo1">
+  <model name="eSilo1">
     <frame fileName="ecylo1.s3d" />
   </model>
-  <model name="ExplodingSilo2">
+  <model name="eSilo2">
     <frame fileName="ecylo2.s3d" />
   </model>
-  <model name="ExplodingSilo3">
+  <model name="eSilo3">
     <frame fileName="ecylo3.s3d" />
   </model>
-  <model name="ExplodingSilo4">
+  <model name="eSilo4">
     <frame fileName="ecylo4.s3d" />
   </model>
-  <model name="GhostSilo1">
+  <model name="gSilo1">
     <frame fileName="gcylo1.s3d" />
   </model>
-  <model name="GhostSilo2">
+  <model name="gSilo2">
     <frame fileName="gcylo2.s3d" />
   </model>
-  <model name="GhostSilo3">
+  <model name="gSilo3">
     <frame fileName="gcylo3.s3d" />
   </model>
-  <model name="GhostSilo4">
+  <model name="gSilo4">
     <frame fileName="gcylo4.s3d" />
   </model>
-  <model name="BuzzedSilo1">
+  <model name="bSilo1">
     <frame fileName="bcylo1.s3d" />
   </model>
-  <model name="BuzzedSilo2">
+  <model name="bSilo2">
     <frame fileName="bcylo2.s3d" />
   </model>
-  <model name="BuzzedSilo3">
+  <model name="bSilo3">
     <frame fileName="bcylo3.s3d" />
   </model>
-  <model name="BuzzedSilo4">
+  <model name="bSilo4">
     <frame fileName="bcylo4.s3d" />
   </model>
 	<model name="Windmill" type="articulated">
