@@ -28,6 +28,8 @@
 			<frameref frame="1" />
 		</anim>
 	</model>
+  <!-->Silos
+  Julia: I added to this section to include more types of silo models to select from<-->
 	<model name="Silo1">
 		<frame fileName="cylo1.s3d" />
 	</model>
@@ -40,6 +42,42 @@
 	<model name="Silo4">
 		<frame fileName="cylo4.s3d" />
 	</model>
+  <model name="ExplodingSilo1">
+    <frame fileName="ecylo1.s3d" />
+  </model>
+  <model name="ExplodingSilo2">
+    <frame fileName="ecylo2.s3d" />
+  </model>
+  <model name="ExplodingSilo3">
+    <frame fileName="ecylo3.s3d" />
+  </model>
+  <model name="ExplodingSilo4">
+    <frame fileName="ecylo4.s3d" />
+  </model>
+  <model name="GhostSilo1">
+    <frame fileName="gcylo1.s3d" />
+  </model>
+  <model name="GhostSilo2">
+    <frame fileName="gcylo2.s3d" />
+  </model>
+  <model name="GhostSilo3">
+    <frame fileName="gcylo3.s3d" />
+  </model>
+  <model name="GhostSilo4">
+    <frame fileName="gcylo4.s3d" />
+  </model>
+  <model name="BuzzedSilo1">
+    <frame fileName="bcylo1.s3d" />
+  </model>
+  <model name="BuzzedSilo2">
+    <frame fileName="bcylo2.s3d" />
+  </model>
+  <model name="BuzzedSilo3">
+    <frame fileName="bcylo3.s3d" />
+  </model>
+  <model name="BuzzedSilo4">
+    <frame fileName="bcylo4.s3d" />
+  </model>
 	<model name="Windmill" type="articulated">
 	    <submodel>
 			<part first="0" last="32" />
