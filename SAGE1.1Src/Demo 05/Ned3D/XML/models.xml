@@ -28,36 +28,47 @@
 			<frameref frame="1" />
 		</anim>
 	</model>
-	<model name="eSilo1">
+  <!-->Silos
+  Julia: I added to this section to include more types of silo models to select from<-->
+	<model name="Silo1">
 		<frame fileName="cylo1.s3d" />
 	</model>
-	<model name="eSilo2">
-		<frame fileName="cylo2.s3d" />
-	</model>
-	<model name="eSilo3">
-		<frame fileName="cylo3.s3d" />
-	</model>
-	<model name="eSilo4">
-		<frame fileName="cylo4.s3d" />
-	</model>
-	<model name="gSilo1">
-		<frame fileName="cylo1.s3d" />
-	</model>
-	<model name="gSilo2">
-		<frame fileName="cylo2.s3d" />
-	</model>
-	<model name="gSilo3">
-		<frame fileName="cylo3.s3d" />
-	</model>
-	<model name="gSilo4">
-		<frame fileName="cylo4.s3d" />
-	</model>
-	<model name="bSilo1">
-		<frame fileName="cylo1.s3d" />
-	</model>
-	<model name="bSilo2">
-		<frame fileName="cylo2.s3d" />
-	</model>
+  <model name="eSilo1">
+    <frame fileName="ecylo1.s3d" />
+  </model>
+  <model name="eSilo2">
+    <frame fileName="ecylo2.s3d" />
+  </model>
+  <model name="eSilo3">
+    <frame fileName="ecylo3.s3d" />
+  </model>
+  <model name="eSilo4">
+    <frame fileName="ecylo4.s3d" />
+  </model>
+  <model name="gSilo1">
+    <frame fileName="gcylo1.s3d" />
+  </model>
+  <model name="gSilo2">
+    <frame fileName="gcylo2.s3d" />
+  </model>
+  <model name="gSilo3">
+    <frame fileName="gcylo3.s3d" />
+  </model>
+  <model name="gSilo4">
+    <frame fileName="gcylo4.s3d" />
+  </model>
+  <model name="bSilo1">
+    <frame fileName="bcylo1.s3d" />
+  </model>
+  <model name="bSilo2">
+    <frame fileName="bcylo2.s3d" />
+  </model>
+  <model name="bSilo3">
+    <frame fileName="bcylo3.s3d" />
+  </model>
+  <model name="bSilo4">
+    <frame fileName="bcylo4.s3d" />
+  </model>
 	<model name="Windmill" type="articulated">
 	    <submodel>
 			<part first="0" last="32" />
