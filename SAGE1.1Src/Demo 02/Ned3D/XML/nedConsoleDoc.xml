@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<commands>		
+	<viewreflection comment = "Enables reflection texture display.">
+			<bool comment = "True - Enable.  False - Disable"/>
+	</viewreflection>		
+</commands>

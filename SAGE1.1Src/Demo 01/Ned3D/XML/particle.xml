@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Particle effect definitions -->
+<definitions>
+
+  <system name="planeexplosion" numcopies="25" >
+    <effect name="fire1" particleCount="300" textureName="particle01.png">
+      <emit rate="90000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="0" />
+      <gravity value="0, 0, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="1.5" />
+      <particlespeed value="65" />
+      <particlecolor value="255, 240, 190, 110" />
+      <particlesize value="7" />
+      <particledrag value="6" />
+      <particlefade fadein=".1" fadeout=".7" fademax=".2" />
+    </effect>
+    <effect name="fire2" particleCount="200" textureName="particle01.png">
+      <emit rate="90000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="0" />
+      <gravity value="0, 0, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="1.5" />
+      <particlespeed value="50" />
+      <particlecolor value="255, 255, 100, 100" />
+      <particlesize value="4" />
+      <particledrag value="6" />
+      <particlefade fadein=".3" fadeout=".5" fademax=".2" />
+    </effect>
+    <effect name="fire3" particleCount="200" textureName="particle01.png">
+      <emit rate="90000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="0" />
+      <gravity value="0, 0, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="1.2" />
+      <particlespeed value="40" />
+      <particlecolor value="255, 230, 230, 100" />
+      <particlesize value="2" />
+      <particledrag value="6" />
+      <particlefade fadein=".3" fadeout=".5" fademax=".2" />
+    </effect>
+    <effect name="sparks" particleCount="125" textureName="particle01.png">
+      <emit rate="90000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="0" />
+      <gravity value="0, -3, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="1" />
+      <particlespeed value="80" />
+      <particlecolor value="255, 255, 255, 0" />
+      <particlesize value=".1" />
+      <particledrag value="6" />
+      <particlefade fadein=".05" fadeout=".95" fademax=".4" />
+    </effect>
+  </system>
+  
+  <system name="crowfeathers" numcopies="25" >
+    <effect name="feathers" particleCount="40" textureName="particle03.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, -5, 0" />
+      <position value="0, 0, 0" />
+      <particlelife value="2" />
+      <particlespeed value="40" />
+      <particlecolor value="20, 20, 20, 40" />
+      <particlesize value=".8" />
+      <particledrag value="6" />
+      <particlefade fadein=".01" fadeout=".9" fademax="1" />
+      <particlerotation initial="18" stoptime="1.7" />
+    </effect>
+  </system>
+  
+  <system name="crowfeathertrail" numcopies="2" >
+    <effect name="feathers" particleCount="80" textureName="particle03.png">
+      <emit rate="35" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, -5, 0" />
+      <position value="0, 0, 0" />
+      <particlelife value="2" />
+      <particlespeed value="10" />
+      <particlecolor value="20, 20, 20, 40" />
+      <particlesize value=".8" />
+      <particledrag value="6" />
+      <particlefade fadein=".01" fadeout=".9" fademax="1" />
+      <particlerotation initial="18" stoptime="1.7" />
+    </effect>
+  </system>
+  
+  <system name="crowfeatherssplat" numcopies="25" >
+    <effect name="feathers" particleCount="200" textureName="particle03.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 2, 0" />
+      <position value="0, 0, 0" />
+      <particlelife value="2" />
+      <particlespeed value="40" />
+      <particlecolor value="20, 20, 20, 40" />
+      <particlesize value=".8" />
+      <particledrag value="6" />
+      <particlefade fadein=".01" fadeout=".9" fademax="1" />
+      <particlerotation initial="18" stoptime="1.7" />
+    </effect>
+  </system>
+  
+  <system name="smokelight" numcopies="2" >
+    <effect name="smoke" particleCount="40" textureName="particle01.png">
+      <emit rate="60" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 130, 130, 130" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>
+    
+  <system name="smokemedium" numcopies="2" >
+    <effect name="smoke" particleCount="200" textureName="particle01.png">
+      <emit rate="200" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 130, 130, 130" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="smokeblack" particleCount="100" textureName="particle01.png">
+      <emit rate="300" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 60, 60, 60" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>
+  
+  <system name="smokeheavy" numcopies="2" >
+    <effect name="smokegrey" particleCount="300" textureName="particle01.png">
+      <emit rate="300" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 130, 130, 130" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="smokeblack" particleCount="300" textureName="particle01.png">
+      <emit rate="300" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 40, 40, 40" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>
+    
+  <system name="smokeveryheavy" numcopies="2" >    
+    <effect name="smokegrey" particleCount="300" textureName="particle01.png">
+      <emit rate="300" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 130, 130, 130" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="smokeblack" particleCount="300" textureName="particle01.png">
+      <emit rate="500" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="8" />
+      <particlecolor value="100, 40, 40, 40" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>
+
+  
+  <system name="bulletdust" numcopies="25" >
+    <effect name="finedust" particleCount="30" textureName="particle01.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="8" />
+      <particlecolor value="20, 190, 170, 170" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="mediumdust" particleCount="10" textureName="particle01.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="6" />
+      <particlecolor value="20, 130, 110, 110" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="chunkydust" particleCount="15" textureName="particle01.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, -4, 0" />
+      <position value="0, 4, 0" />
+      <particlelife value="1.2" />
+      <particlespeed value="3" />
+      <particlecolor value="20, 90, 60, 60" />
+      <particlesize value=".15" />
+      <particledrag value=".5" />
+      <particlefade fadein=".3" fadeout=".8" fademax=".6" />
+    </effect>
+  </system>
+  
+  <system name="bulletspray" numcopies="25" >
+    <effect name="finespray" particleCount="30" textureName="particle01.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="10" />
+      <particlecolor value="20, 240, 240, 255" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="mediumspray" particleCount="10" textureName="particle01.png">
+      <emit rate="1000" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value=".65" />
+      <particlespeed value="8" />
+      <particlecolor value="20, 150, 180, 250" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>
+  
+  <system name="muzzlefire" numcopies="10" >
+    <effect name="mf1" particleCount="10" textureName="particle01.png">
+      <emit rate="200" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 0, 0" />
+      <position value="0, 0, 0" />
+      <particlelife value=".05" />
+      <particlespeed value="2" />
+      <particlecolor value="20, 230, 230, 0" />
+      <particlesize value=".5" />
+      <particledrag value="1" />
+      <particlefade fadein=".4" fadeout=".8" fademax=".2" />
+    </effect>
+    <effect name="mf2" particleCount="10" textureName="particle01.png">
+      <emit rate="200" shape="solidsphere" />
+      <cycle value="0" />
+      <sort value="1" />
+      <gravity value="0, 0, 0" />
+      <position value="0, 0, 0" />
+      <particlelife value=".05" />
+      <particlespeed value="4" />
+      <particlecolor value="20, 230, 200, 0" />
+      <particlesize value=".4" />
+      <particledrag value="1" />
+      <particlefade fadein=".4" fadeout=".8" fademax=".2" />
+    </effect>
+  </system>
+  
+</definitions>

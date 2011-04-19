@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<commands>
+	<camerafollow comment = "Sets the current camera to the tether camera.">							
+	</camerafollow>	
+	<cameratarget comment = "Sets the follow camera target to a specified object">
+			<string comment = "Unique name of object"/>
+	</cameratarget>
+		
+</commands>

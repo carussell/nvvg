@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<directories>
+	<textures path="\Textures"/>	
+	<xmls path="\XML"/>
+	<engine path="\..\SAGE\SAGE Resources"/>
+</directories>

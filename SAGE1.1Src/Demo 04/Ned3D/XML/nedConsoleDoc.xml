@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<commands>	
+	<godmode comment = "Make the plane invincible">						
+			<bool comment = "True - Invincible.  False - Normal Damage"/>
+	</godmode>
+	<camerafollow comment = "Sets the current camera to the tether camera.">							
+	</camerafollow>	
+	<cameratarget comment = "Sets the follow camera target to a specified object">
+			<string comment = "Unique name of object"/>
+	</cameratarget>
+		
+</commands>

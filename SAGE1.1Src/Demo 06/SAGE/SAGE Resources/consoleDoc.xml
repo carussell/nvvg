@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<commands>
+	<help comment = "Provides description of any given command.">						
+			<string comment = "Name of the command you want to see a description of.  This can be -a to see a list of all commands"/>						
+	</help>	
+	<problems comment = "Ouputs any errors linking command comments from an XML.">				
+			<bool comment = "true will only display critical problems (commands defined in an XML but not in code)"/>						
+	</problems>		
+	<wireframe comment = "Enables or disables wireframe rendering">
+			<bool comment = "true enables wireframe, false disables"></bool>
+	</wireframe>	
+	<fog comment = "Enables or disables fog">
+			<bool comment = "true enables fog, false disables"></bool>
+	</fog>	
+	<camerafree comment = "Sets the current camera to a free viewing camera that can be controlled be the mouse and the arrow keys">	
+	</camerafree>
+	<cameraspeed comment = "Sets the speed of the free camera">
+			<float comment = "Desired speed of the free camera in units/second"/>
+	</cameraspeed>
+	<info comment = "Specifies whether to render frames per second and number of triangles rendered">
+			<bool comment = "True - Render, False - Do Not Render"/>
+	</info>	
+	<ambient comment = "Sets the ambient lighting of the environment">
+			<int comment = "Red Component (0 - 255)"/>
+			<int comment = "Blue Component (0 - 255)"/>
+			<int comment = "Green Component (0 - 255)"/>
+	</ambient>
+	<dircolor comment = "Sets the directional light color in the environment">
+			<int comment = "Red Component (0 - 255)"/>
+			<int comment = "Blue Component (0 - 255)"/>
+			<int comment = "Green Component (0 - 255)"/>
+	</dircolor>
+	<lightdirection comment = "Sets the direction of the directional light.  The direction will be normalized automatically.">
+			<float comment = "Directional X component"/>
+			<float comment = "Directional Y component"/>
+			<float comment = "Directional Z component"/>
+	</lightdirection>
+	<joystick comment = "Enables/Disables the use of the joystick">
+			<bool comment = "True - Enable, False - Disable"/>
+	</joystick>
+	<boundingbox comment = "Enables/Disables the bounding box display around objects">
+			<bool comment = "True - Enable, False - Disable"/>
+	</boundingbox>
+	<modellerp comment = "Enables/Disables interpolation on animated models">
+			<bool comment = "True - Enable, False - Disable"/>
+	</modellerp>
+	<terraindistort comment = "Enables/Disables the distortion of texture coordinates on the terrain.">
+			<bool comment = "True - Distort, False - Don't Distort"/>
+	</terraindistort>
+	<lod comment = "Sets the level of detail of the terrain">
+			<int comment = "0 - 2 with 0 being the highest detail.  Any number out of range specifies distance base level of detail."/>
+	</lod>
+	<reflection comment = "Enables/Disables the rendering of reflections">
+			<bool comment = "True - Enable, False - Disable"/>
+	</reflection>
+	
+</commands>

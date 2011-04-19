@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<terrain>
+	<heightmap value = "heightmap.tga"/>
+	<stretch value = "20.0"/>
+	<maxheight value = "400.0"/>
+	<fade bottom ="35.0" top = "75.0"/>
+	<textures>
+		<texture filename="sand.tga" stretch="2.20" minheight="-1000.0" maxheight="105.0"/>
+		<texture filename="mud.tga" stretch="2.06" minheight="115.0" maxheight="135.0"/>
+		<texture filename="clods.tga" stretch="1.37" minheight="160.0" maxheight="180.0"/>
+		<texture filename="grass.tga" stretch="1.63" minheight="200.0" maxheight="240.0"/>
+		<texture filename="rock.tga" stretch="0.5" minheight="260.0" maxheight="300.0"/>
+		<texture filename="snow.tga" stretch="0.63" minheight="320.0" maxheight="1000.0"/>
+	</textures>
+</terrain>

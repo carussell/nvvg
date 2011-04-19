@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<models>
+	<model name="Plane" type="articulated">
+		<submodel>
+			<part first="0" last="15" />
+			<part first="17" last="29" />
+		</submodel>
+		<submodel>
+			<offset y="-0.4" />
+			<part first="16" />
+		</submodel>
+		<frame fileName="plane2.1.s3d" />
+	</model>
+	<model name="Crow" type="animated">
+		<frame fileName="crow00.s3d" />
+		<frame fileName="crow01.s3d" />
+		<frame fileName="crow02.s3d" />
+		<frame fileName="crow03.s3d" />
+		<frame fileName="crow04.s3d" />
+		<anim>
+			<frameref frame="0" />
+			<frameref frame="3" />
+			<frameref frame="4" />
+			<frameref frame="3" />
+			<frameref frame="0" />
+			<frameref frame="1" />
+			<frameref frame="2" />
+			<frameref frame="1" />
+		</anim>
+	</model>
+	<model name="Silo1">
+		<frame fileName="cylo1.s3d" />
+	</model>
+	<model name="Silo2">
+		<frame fileName="cylo2.s3d" />
+	</model>
+	<model name="Silo3">
+		<frame fileName="cylo3.s3d" />
+	</model>
+	<model name="Silo4">
+		<frame fileName="cylo4.s3d" />
+	</model>
+	<model name="Windmill" type="articulated">
+	    <submodel>
+			<part first="0" last="32" />
+			<part first="34" last="36" />
+			<part first="48" />
+	    </submodel>
+	    <submodel>
+			<offset y="-27.0" />
+			<part first="33" />
+			<part first="37" last="47" />
+			<part first="49" />
+	    </submodel>
+		<frame fileName="windmill.s3d" />
+	</model>
+</models>

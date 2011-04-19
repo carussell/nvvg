@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<water 
+	height = "99.5" 
+	meshType ="wedge"	
+	>			
+	<color a = "150" r = "255" g = "255" b = "255"/>
+	<textures stretch = "50.0" speedX = "0.1" speedY = "0.2">
+		<bumpmap filename="watermap.tga"/>
+		<texture filename="water.tga"/>		
+	</textures>
+</water>

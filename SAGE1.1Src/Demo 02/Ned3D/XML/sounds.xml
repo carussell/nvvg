@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<sounds>	
+	<sound name = "Boom.wav" count = 1 mindistance = 10000 maxdistance = 100000/>
+	<sound name = "crowdeath.wav" count = 6 mindistance = 10000 maxdistance = 100000/>
+	<sound name = "Failed.wav" count = 1  mindistance = 10000 maxdistance = 100000/>
+	<sound name = "Gun.wav" count = 12  mindistance = 50 maxdistance = 100000/>
+	<sound name = "Larc.wav" count = 1/>
+	<sound name = "ricochet.wav" count = 12 mindistance = 130 maxdistance = 10000/>
+	<sound name = "windmill2.wav" count = 1 mindistance = 200 maxdistance = 10000/>	
+	<sound name = "Thump.wav" count = 6 mindistance = 10000 maxdistance = 100000/>	
+</sounds>
