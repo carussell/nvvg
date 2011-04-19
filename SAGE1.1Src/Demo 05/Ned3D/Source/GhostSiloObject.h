@@ -31,7 +31,8 @@
 #ifndef __GHOSTSILOOBJECT_H_INCLUDED__
 #define __GHOSTSILOOBJECT_H_INCLUDED__
 
-#include "Objects/SiloObject.h"
+#include "SiloObject.h"
+#include "ObjectTypes.h"
 
 class GhostSiloObject : public SiloObject
 {

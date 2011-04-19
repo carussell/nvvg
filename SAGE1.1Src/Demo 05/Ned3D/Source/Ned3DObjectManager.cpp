@@ -39,6 +39,9 @@
 #include "Objects.h"
 #include "ObjectTypes.h"
 #include "DirectoryManager/DirectoryManager.h"
+#include "ExplodingSiloObject.h"
+#include "GhostSiloObject.h"
+#include "BuzzedSiloObject.h"
 
 PlaneObject* gPlane;
 
@@ -80,6 +83,9 @@ void Ned3DObjectManager::clear()
   m_crows.clear();
   m_bullets.clear();
   m_furniture.clear();
+  m_explodingSilos.clear();
+  m_buzzedSilos.clear();
+  m_ghostSilos.clear();
   GameObjectManager::clear();
 }
 
@@ -99,8 +105,14 @@ void Ned3DObjectManager::handleInteractions()
       if(!crow.isAlive()) continue;
       interactCrowBullet(crow, bullet);
     }
+	bool noSilo = true;
+	for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
+		SiloObject &silo = (SiloObject &)**esit;
+		interactBulletExplodingSilo(silo, bullet);
+		noSilo = false;
+	}
     GameObject *victim = bullet.getVictim();
-    if(victim != NULL)
+    if(noSilo && victim != NULL)
     {
       // Bullet hit something
       switch(victim->getType())
@@ -113,6 +125,18 @@ void Ned3DObjectManager::handleInteractions()
     }
   }
   
+  for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
+	  SiloObject &silo = (SiloObject &)**esit;
+	  interactPlaneExplodingSilo(*m_plane, silo);
+  }
+  for(ObjectSetIter bsit = m_buzzedSilos.begin(); bsit != m_buzzedSilos.end(); ++bsit){
+	  SiloObject &silo = (SiloObject &)**bsit;
+      interactPlaneBuzzedSilo(*m_plane, silo);
+  }
+  for(ObjectSetIter gsit = m_ghostSilos.begin(); gsit != m_ghostSilos.end(); ++gsit){
+	  SiloObject &silo = (SiloObject &)**gsit;
+      interactPlaneGhostSilo(*m_plane, silo);
+  }
   // Handle crow-crow interactions (slow....) and crow-plane interactions
   
   for(ObjectSetIter cit1 = m_crows.begin(); cit1 != m_crows.end(); ++cit1)
@@ -131,7 +155,7 @@ void Ned3DObjectManager::handleInteractions()
       interactCrowCrow(crow1, crow2);
     }
   }
-  
+
   // Handle plane crashes
   
   interactPlaneTerrain(*m_plane, *m_terrain);
@@ -209,17 +233,36 @@ unsigned int Ned3DObjectManager::spawnWater(Water *water)
 
 unsigned int Ned3DObjectManager::spawnSilo(const Vector3 &position, const EulerAngles &orientation)
 {
-  static const std::string silos[] = {"Silo1","Silo2","Silo3","Silo4"};
+  static const std::string silos[] = {"eSilo1","eSilo2","eSilo3","eSilo4", "gSilo1", "gSilo2", 
+										"gSilo3", "gSilo4", "bSilo1", "bSilo2"};
+  unsigned int id = -1;
   static int whichSilo = 0;
   m_siloModel = m_models->getModelPointer(silos[whichSilo]); // Cache silo model
   if(m_siloModel == NULL)
     return 0;  // Still NULL?  No such model
-  SiloObject *silo = new SiloObject(m_siloModel);
-  silo->setPosition(position);
-  silo->setOrientation(orientation);
-  unsigned int id = addObject(silo);
-  m_furniture.insert(silo);
-  whichSilo = ++whichSilo % 4;
+
+  if (whichSilo < 4){
+	ExplodingSiloObject *silo = new ExplodingSiloObject(m_siloModel);
+	silo->setPosition(position);
+	silo->setOrientation(orientation);
+	id = addObject(silo);
+	m_explodingSilos.insert(silo);
+  }
+  else if (whichSilo < 8){
+	GhostSiloObject *silo = new GhostSiloObject(m_siloModel);
+	silo->setPosition(position);
+	silo->setOrientation(orientation);
+	id = addObject(silo);
+	m_ghostSilos.insert(silo);
+  }
+  else{
+	BuzzedSiloObject *silo = new BuzzedSiloObject(m_siloModel);
+	silo->setPosition(position);
+	silo->setOrientation(orientation);
+	id = addObject(silo);
+	m_buzzedSilos.insert(silo);
+  }
+  whichSilo = ++whichSilo % 10;
   return id;
 }
 
@@ -279,6 +322,58 @@ void Ned3DObjectManager::deleteObject(GameObject *object)
   m_furniture.erase(object);
   GameObjectManager::deleteObject(object);
 }
+/** NEW STUFF **/
+bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, SiloObject &buzzedSilo)
+{
+	bool collided = enforcePositions(plane, buzzedSilo);
+	bool buzzed = false;
+	if (collided) {
+		plane.damage(1);
+		//mark silo
+	}
+	else {
+		SiloObject newbs = buzzedSilo;
+		float height = newbs.m_boundingBox.max.z - newbs.m_boundingBox.min.z;
+		newbs.m_boundingBox.min.z = newbs.m_boundingBox.max.z;
+		newbs.m_boundingBox.max.z = newbs.m_boundingBox.max.z + height;
+		buzzed = enforcePositions(plane, newbs);
+		if (buzzed){
+			//mark silo
+		}
+	}
+	return (collided || buzzed);
+}
+
+/** NEW STUFF **/
+bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, SiloObject &ghostSilo)
+{
+	bool collided = enforcePositions(plane, ghostSilo);
+	if (collided) {
+		//dissolve silo
+	}
+	return collided;
+}
+
+/** NEW STUFF **/
+bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, SiloObject &explodingSilo)
+{
+	bool collided = enforcePositions(plane, explodingSilo);
+	if (collided) {
+		plane.damage(1);
+		//kill silo
+	}
+	return collided;
+}
+
+/** NEW STUFF **/
+bool Ned3DObjectManager::interactBulletExplodingSilo(SiloObject &explodingSilo, BulletObject &bullet)
+{
+	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
+	if (collided){
+		//kill silo
+	}
+	return collided;
+}		
 
 bool Ned3DObjectManager::interactPlaneCrow(PlaneObject &plane, CrowObject &crow)
 {

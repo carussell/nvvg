@@ -31,7 +31,8 @@
 #ifndef __BUZZEDSILOOBJECT_H_INCLUDED__
 #define __BUZZEDSILOOBJECT_H_INCLUDED__
 
-#include "Objects/SiloObject.h"
+#include "SiloObject.h"
+#include "ObjectTypes.h"
 
 class BuzzedSiloObject : public SiloObject
 {

@@ -54,7 +54,7 @@ namespace ObjectTypes
     TERRAIN,
     WATER,
     SILO,
-    WINDMILL
+    WINDMILL,
     BUZZEDSILO,
     EXPLODINGSILO,
     GHOSTSILO

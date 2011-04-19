@@ -4,6 +4,7 @@
 	Version="9.00"
 	Name="SAGE"
 	ProjectGUID="{85445FFC-2A3C-4015-BD42-9BDE97603CA9}"
+	RootNamespace="SAGE"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -107,7 +108,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)/source/&quot;;&quot;C:\Program Files\Microsoft DirectX SDK (August 2006)\Include&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)/source/&quot;;&quot;C:\Program Files\Microsoft DirectX SDK (June 2010)\Include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"

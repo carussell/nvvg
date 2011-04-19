@@ -28,17 +28,35 @@
 			<frameref frame="1" />
 		</anim>
 	</model>
-	<model name="Silo1">
+	<model name="eSilo1">
 		<frame fileName="cylo1.s3d" />
 	</model>
-	<model name="Silo2">
+	<model name="eSilo2">
 		<frame fileName="cylo2.s3d" />
 	</model>
-	<model name="Silo3">
+	<model name="eSilo3">
 		<frame fileName="cylo3.s3d" />
 	</model>
-	<model name="Silo4">
+	<model name="eSilo4">
 		<frame fileName="cylo4.s3d" />
+	</model>
+	<model name="gSilo1">
+		<frame fileName="cylo1.s3d" />
+	</model>
+	<model name="gSilo2">
+		<frame fileName="cylo2.s3d" />
+	</model>
+	<model name="gSilo3">
+		<frame fileName="cylo3.s3d" />
+	</model>
+	<model name="gSilo4">
+		<frame fileName="cylo4.s3d" />
+	</model>
+	<model name="bSilo1">
+		<frame fileName="cylo1.s3d" />
+	</model>
+	<model name="bSilo2">
+		<frame fileName="cylo2.s3d" />
 	</model>
 	<model name="Windmill" type="articulated">
 	    <submodel>
