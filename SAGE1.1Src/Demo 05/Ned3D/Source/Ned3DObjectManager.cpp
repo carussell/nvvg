@@ -107,7 +107,7 @@ void Ned3DObjectManager::handleInteractions()
     }
 	bool noSilo = true;
 	for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
-		SiloObject &silo = (SiloObject &)**esit;
+		ExplodingSiloObject &silo = (ExplodingSiloObject &)**esit;
 		interactBulletExplodingSilo(silo, bullet);
 		noSilo = false;
 	}
@@ -126,15 +126,15 @@ void Ned3DObjectManager::handleInteractions()
   }
   
   for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
-	  SiloObject &silo = (SiloObject &)**esit;
+	  ExplodingSiloObject &silo = (ExplodingSiloObject &)**esit;
 	  interactPlaneExplodingSilo(*m_plane, silo);
   }
   for(ObjectSetIter bsit = m_buzzedSilos.begin(); bsit != m_buzzedSilos.end(); ++bsit){
-	  SiloObject &silo = (SiloObject &)**bsit;
+	  BuzzedSiloObject &silo = (BuzzedSiloObject &)**bsit;
       interactPlaneBuzzedSilo(*m_plane, silo);
-  }
+  }  
   for(ObjectSetIter gsit = m_ghostSilos.begin(); gsit != m_ghostSilos.end(); ++gsit){
-	  SiloObject &silo = (SiloObject &)**gsit;
+	  GhostSiloObject &silo = (GhostSiloObject &)**gsit;
       interactPlaneGhostSilo(*m_plane, silo);
   }
   // Handle crow-crow interactions (slow....) and crow-plane interactions
@@ -323,20 +323,16 @@ void Ned3DObjectManager::deleteObject(GameObject *object)
   GameObjectManager::deleteObject(object);
 }
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, SiloObject &buzzedSilo)
+bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo)
 {
 	bool collided = enforcePositions(plane, buzzedSilo);
 	bool buzzed = false;
 	if (collided) {
-		plane.damage(1);
+		plane.killPlane();
 		//mark silo
 	}
 	else {
-		SiloObject newbs = buzzedSilo;
-		float height = newbs.m_boundingBox.max.z - newbs.m_boundingBox.min.z;
-		newbs.m_boundingBox.min.z = newbs.m_boundingBox.max.z;
-		newbs.m_boundingBox.max.z = newbs.m_boundingBox.max.z + height;
-		buzzed = enforcePositions(plane, newbs);
+		buzzed = buzzedObject(plane, buzzedSilo);
 		if (buzzed){
 			//mark silo
 		}
@@ -345,32 +341,32 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, SiloObject 
 }
 
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, SiloObject &ghostSilo)
+bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo)
 {
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
-		//dissolve silo
+		plane.killPlane();
 	}
 	return collided;
 }
 
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, SiloObject &explodingSilo)
+bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, ExplodingSiloObject &explodingSilo)
 {
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
-		plane.damage(1);
+		plane.killPlane();
 		//kill silo
 	}
 	return collided;
 }
 
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactBulletExplodingSilo(SiloObject &explodingSilo, BulletObject &bullet)
+bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet)
 {
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
-		//kill silo
+		//;
 	}
 	return collided;
 }		
@@ -499,6 +495,22 @@ void Ned3DObjectManager::shootCrow(CrowObject &crow)
   Vector3 crowPos = crow.getPosition();
   gParticle.setSystemPos(tmpHndl, crowPos);
   crow.setDying();
+}
+
+bool Ned3DObjectManager::buzzedObject(GameObject &moving, GameObject &stationary)
+{
+  const AABB3 &box1 = moving.getBoundingBox(), &box2 = stationary.getBoundingBox();
+  AABB3 intersectBox;
+  AABB3 otherBox;
+  float minZ = box2.max.z;
+  float height = minZ - box1.min.z;
+  const Vector3 obj1Pos = Vector3(box2.min.x, box2.min.y, minZ);
+  const Vector3 obj2Pos = Vector3(box2.max.x, box2.max.y, minZ+height);
+  intersectBox.min.set(obj1Pos);
+  intersectBox.min.set(obj2Pos);
+  if(AABB3::intersect(box1, intersectBox, &otherBox))
+	  return true;
+  return false;
 }
 
 bool Ned3DObjectManager::enforcePosition(GameObject &moving, GameObject &stationary)
