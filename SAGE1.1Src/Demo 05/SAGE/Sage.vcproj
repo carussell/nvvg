@@ -42,7 +42,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)/SAGE/Source/&quot;;&quot;C:\Program Files\Microsoft DirectX SDK (August 2006)\Include&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)/SAGE/Source/&quot;;&quot;C:\Program Files\Microsoft DirectX SDK (June 2010)\Include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

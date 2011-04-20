@@ -140,20 +140,17 @@ bool Game::initiate()
     (0.0f,terrain->getHeight(0.0f,0.0f) + 10.0f,0.0f));
 
   // Load silos
-	srand(time(NULL));
+  
+	srand(Random.getInt());
+	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
 		float rx = (float) (rand()%1280-640);
 		float rz = (float) (rand()%1280-640);
-	    objects->spawnSilo(LocationOnterrain(rx, 10.0f, rz));
-  /*objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(-30.0f, 10.0f, 120.0f));
-  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 120.0f));
-  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 120.0f));
-  objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 120.0f));
-  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 140.0f));
-  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 140.0f));*/
+		float th = terrain->getHeight(rx, rz);
+		if (th <= wh)
+			i--;
+		else
+			objects->spawnSilo(LocationOnterrain(rx, 10.0f, rz));
 	}
 
   // Load windmill
