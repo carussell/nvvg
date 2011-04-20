@@ -328,13 +328,14 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 	bool collided = enforcePositions(plane, buzzedSilo);
 	bool buzzed = false;
 	if (collided) {
+		buzzedSilo.kill();
 		plane.killPlane();
-		//mark silo
 	}
 	else {
 		buzzed = buzzedObject(plane, buzzedSilo);
 		if (buzzed){
 			//mark silo
+			buzzedSilo.kill();
 		}
 	}
 	return (collided || buzzed);
@@ -345,7 +346,7 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 {
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
-		plane.killPlane();
+		ghostSilo.kill();
 	}
 	return collided;
 }
@@ -355,8 +356,8 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 {
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
+		explodingSilo.kill();
 		plane.killPlane();
-		//kill silo
 	}
 	return collided;
 }
@@ -366,7 +367,7 @@ bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explod
 {
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
-		//;
+		explodingSilo.kill();
 	}
 	return collided;
 }		
