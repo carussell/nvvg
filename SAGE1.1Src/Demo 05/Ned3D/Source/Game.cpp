@@ -355,3 +355,7 @@ Vector3 Game::LocationOnterrain(float x, float y, float z)
 {
   return Vector3(x,terrain->getHeight(x,z)+y, z);
 }
+
+
+
+

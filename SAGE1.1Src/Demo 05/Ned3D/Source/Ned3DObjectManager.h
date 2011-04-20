@@ -137,10 +137,10 @@ class Ned3DObjectManager : public GameObjectManager
 
   protected:
 	  /** new code **/
-	  bool interactPlaneGhostSilo(PlaneObject &plane, SiloObject &ghostSilo);
-	  bool interactPlaneBuzzedSilo(PlaneObject &plane, SiloObject &buzzedSilo);
-	  bool interactPlaneExplodingSilo(PlaneObject &plane, SiloObject &explodingSilo);
-	  bool interactBulletExplodingSilo(SiloObject &badSilo, BulletObject &bullet);
+	  bool interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo);
+	  bool interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo);
+	  bool interactPlaneExplodingSilo(PlaneObject &plane, ExplodingSiloObject &explodingSilo);
+	  bool interactBulletExplodingSilo(ExplodingSiloObject &badSilo, BulletObject &bullet);
     bool interactPlaneCrow(PlaneObject &plane, CrowObject &crow); ///< Handles plane-crow interactions, such as collision
     bool interactPlaneTerrain(PlaneObject &plane, TerrainObject &terrain); ///< Handles possible plane-terrain collision
     bool interactPlaneWater(PlaneObject &plane, WaterObject &water); ///< Handles possible plane-water collision
@@ -151,6 +151,7 @@ class Ned3DObjectManager : public GameObjectManager
     
     void shootCrow(CrowObject &crow); ///< Handles crow-bullet collision
     
+	bool buzzedObject(GameObject &moving, GameObject &stationary);
     bool enforcePosition(GameObject &moving, GameObject &stationary); ///< Blocks a moving object from intersecting a stationary object.
     bool enforcePositions(GameObject &obj1, GameObject &obj2); ///< Blocks two moving objects from intersecting each other.
     
