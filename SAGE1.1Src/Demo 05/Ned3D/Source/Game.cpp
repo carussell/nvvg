@@ -140,7 +140,7 @@ bool Game::initiate()
     (0.0f,terrain->getHeight(0.0f,0.0f) + 10.0f,0.0f));
 
   // Load silos
-	//srand(time(NULL));
+	srand(time(NULL));
 	for (int i=0; i< 10; i++){
 		float rx = (float) (rand()%1280-640);
 		float rz = (float) (rand()%1280-640);
