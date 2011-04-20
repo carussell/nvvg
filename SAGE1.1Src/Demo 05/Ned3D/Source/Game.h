@@ -83,6 +83,8 @@ private:
   /// \brief Calculates a location to spawn objects at so that they are flush
   /// to the terrain.
   Vector3 LocationOnterrain(float x, float y, float z);  
+
+   //void SetSilos(int amount);
 }; 
 
 extern Game gGame; // extern a global instance of this object

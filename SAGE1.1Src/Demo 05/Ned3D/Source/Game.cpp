@@ -42,6 +42,9 @@
 #include "Graphics/ModelManager.h"
 #include "Objects/GameObject.h"
 #include "Particle/ParticleEngine.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 extern CRandom Random;
 
@@ -137,8 +140,12 @@ bool Game::initiate()
     (0.0f,terrain->getHeight(0.0f,0.0f) + 10.0f,0.0f));
 
   // Load silos
-  objects->spawnSilo(LocationOnterrain(-30.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 100.0f));
+	//srand(time(NULL));
+	for (int i=0; i< 10; i++){
+		float rx = (float) (rand()%1280-640);
+		float rz = (float) (rand()%1280-640);
+	    objects->spawnSilo(LocationOnterrain(rx, 10.0f, rz));
+  /*objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 100.0f));
   objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 100.0f));
   objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 100.0f));
   objects->spawnSilo(LocationOnterrain(-30.0f, 10.0f, 120.0f));
@@ -146,7 +153,8 @@ bool Game::initiate()
   objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 120.0f));
   objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 120.0f));
   objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 140.0f));
-  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 140.0f));
+  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 140.0f));*/
+	}
 
   // Load windmill
   unsigned int windmillID = objects->spawnWindmill(LocationOnterrain(60.0f, 0.0f, 100.0f));
@@ -355,6 +363,7 @@ Vector3 Game::LocationOnterrain(float x, float y, float z)
 {
   return Vector3(x,terrain->getHeight(x,z)+y, z);
 }
+
 
 
 
