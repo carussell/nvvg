@@ -35,10 +35,33 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
 {
   this->m_className = "BuzzedSilo";
   this->m_type = ObjectTypes::BUZZEDSILO;
+<<<<<<< HEAD
   this->m_isBuzzedSiloDead = false;
+=======
+
+  this->m_allTextures.resize(1);//somewhat pointless to have in a vector, but it works this way...
+  this->m_allTextures[0] = "buzzedcylo.tga"; // when dead
+
+>>>>>>> 47b9e939f727d93ecc8e03b35c772dfcf5acb446
 }
 
 void BuzzedSiloObject::kill(void)
 {
 	this->m_isBuzzedSiloDead = true;
+}
+
+void BuzzedSiloObject::tag(void)
+{
+	setTexture();
+}
+void BuzzedSiloObject::setTexture()
+{
+  int textureIndex = 0;// index into m_allTextures array
+      // set texture 
+  int numParts = m_pModel->getPartCount();
+  for (int a = 0; a < numParts; a++)
+    m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());
+   m_pModel->cache();
+
+   
 }

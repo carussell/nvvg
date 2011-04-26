@@ -40,10 +40,18 @@ public:
   friend class Ned3DObjectManager;
   
   BuzzedSiloObject(Model *m);
-  
   virtual void kill(void);
+<<<<<<< HEAD
 
   bool m_isBuzzedSiloDead;
+=======
+  virtual void tag(void);
+
+protected:
+	//holds the textures silos will turn
+	std::vector<std::string> m_allTextures; 
+	void setTexture();
+>>>>>>> 47b9e939f727d93ecc8e03b35c772dfcf5acb446
 };
 
 #endif

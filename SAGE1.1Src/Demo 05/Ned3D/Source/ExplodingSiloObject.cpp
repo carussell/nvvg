@@ -62,11 +62,7 @@ ExplodingSiloObject::ExplodingSiloObject(Model *m)
   
 }
 
-/*
-//old
-void ExplodingSiloObject::kill(void)
-{
-}*/
+
 void ExplodingSiloObject::kill(void)
 {
 	this->m_isExplodingSiloDead = true;
