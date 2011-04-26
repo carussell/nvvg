@@ -43,7 +43,7 @@ public:
   
   virtual void kill(void);
 
-  bool m_isGhostSiloAlive;
+  bool m_isGhostSiloDead;
 };
 
 #endif

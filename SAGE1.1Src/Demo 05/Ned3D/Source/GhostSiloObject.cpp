@@ -35,11 +35,11 @@ GhostSiloObject::GhostSiloObject(Model *m)
 {
   this->m_className = "GhostSilo";
   this->m_type = ObjectTypes::GHOSTSILO;
-  this->m_isGhostSiloAlive = true;
+  this->m_isGhostSiloDead = false;
 }
 
 void GhostSiloObject::kill(void)
 {
   this->killObject();
-  this->m_isGhostSiloAlive = false;
+  this->m_isGhostSiloDead = true;
 }

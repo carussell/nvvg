@@ -35,8 +35,10 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
 {
   this->m_className = "BuzzedSilo";
   this->m_type = ObjectTypes::BUZZEDSILO;
+  this->m_isBuzzedSiloDead = false;
 }
 
 void BuzzedSiloObject::kill(void)
 {
+	this->m_isBuzzedSiloDead = true;
 }

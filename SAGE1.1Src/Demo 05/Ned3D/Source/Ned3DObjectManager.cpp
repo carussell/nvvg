@@ -110,7 +110,7 @@ void Ned3DObjectManager::handleInteractions()
 	bool noSilo = true;
 	for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
 		ExplodingSiloObject &silo = (ExplodingSiloObject &)**esit;
-		interactBulletExplodingSilo(silo, bullet);
+		interactBulletExplodingSilo(silo, bullet, *m_plane);
 		noSilo = false;
 	}
     GameObject *victim = bullet.getVictim();
@@ -343,8 +343,8 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 		if (buzzed){
 			//mark silo
 			buzzedSilo.kill();
-			siloCount--;		
-			if (siloCount < 1)
+			siloCount = siloCount--;		
+			if (siloCount == 1)
 				plane.killPlane();
 		}
 	}
@@ -354,13 +354,13 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo)
 {
-	if (ghostSilo.m_isGhostSiloAlive == false)
+	if (ghostSilo.m_isGhostSiloDead)
 		false;
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
 		ghostSilo.kill();
-		siloCount--;		
-		if (siloCount < 1)
+		siloCount = siloCount--;		
+		if (siloCount == 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -371,24 +371,24 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 {
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
-		explodingSilo.smoke();
+		explodingSilo.kill();
 		//plane.reset();
-		siloCount--;		
-		if (siloCount < 1)
+		siloCount = siloCount--;		
+		if (siloCount == 1)
 			plane.killPlane();
 	}
 	return collided;
 }
 
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet)
+bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet, PlaneObject &plane)
 {
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
-		explodingSilo.smoke();	
-		siloCount--;		
-		if (siloCount < 1)
-			gPlane->killPlane();
+		explodingSilo.kill();	
+		siloCount = siloCount--;		
+		if (siloCount == 1)
+			plane.killPlane();
 	}
 	return collided;
 }		

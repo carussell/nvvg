@@ -42,6 +42,8 @@ public:
   BuzzedSiloObject(Model *m);
   
   virtual void kill(void);
+
+  bool m_isBuzzedSiloDead;
 };
 
 #endif

@@ -38,6 +38,7 @@ ExplodingSiloObject::ExplodingSiloObject(Model *m)
 {
   this->m_className = "ExplodingSilo";
   this->m_type = ObjectTypes::EXPLODINGSILO;
+  this->m_isExplodingSiloDead = false;
   this->m_smokeID = -1;
   this->m_allParticles.resize(2);
   this->m_allParticles[0] = "planeexplosion";   // when hp = 0
@@ -68,7 +69,8 @@ void ExplodingSiloObject::kill(void)
 }*/
 void ExplodingSiloObject::kill(void)
 {
-	
+	this->m_isExplodingSiloDead = true;
+	smoke();
 }
  void ExplodingSiloObject::smoke(void)
  {

@@ -48,6 +48,8 @@ public:
   
   virtual void kill(void);
   virtual void smoke(void);
+
+    bool m_isExplodingSiloDead;
 protected:
 	const Vector3 m_enginePosition; ///< Location of engine relative to plane.
 	const Vector3 m_topPosition; //????
