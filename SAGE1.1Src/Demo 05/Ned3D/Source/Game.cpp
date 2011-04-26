@@ -45,6 +45,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string>
 
 extern CRandom Random;
 
@@ -76,6 +77,20 @@ bool Game::consoleSetCameraTarget(ParameterList* params,std::string* errorMessag
   return true;
 }
 
+bool Game::consoleTimerReset(ParameterList* params, std::string* errorMessage)
+{
+	gGame.resetTimer();
+	return true;
+}
+
+bool Game::consoleTimerPrint(ParameterList* params, std::string* errorMessage)
+{
+	std::string timeString;
+	gGame.timeToString(timeString);
+	gConsole.printLine(timeString);
+	return true;
+}
+
 /// Game Constructor.
 /// Clears member variables to default values
 Game::Game():
@@ -86,6 +101,7 @@ GameBase()
   objects = NULL;
 
   m_tetherCamera = NULL;
+  m_timer = gRenderer.getTime();
 }
 
 /// Game Initiate.
@@ -183,6 +199,9 @@ bool Game::initiate()
   
   gConsole.addFunction("camerafollow","",consoleSetFollowCamera);
   gConsole.addFunction("cameratarget","s",consoleSetCameraTarget);
+
+  gConsole.addFunction("timer-print", "", consoleTimerPrint);
+  gConsole.addFunction("timer-reset", "", consoleTimerReset);
 
   // Set the tether camera
   m_tetherCamera->minDist = 10.0f;
@@ -357,6 +376,40 @@ void Game::resetGame()
   m_tetherCamera->reset();
   m_tetherCamera->process(0.0f);
   m_currentCam = m_tetherCamera;   // select tether camera as the current camera
+}
+
+long Game::getTime(void)
+{
+	return gRenderer.getTime() - this->m_timer;
+}
+
+// Returns false if the timer wrapped around.
+bool Game::timeToString(std::string& timeString)
+{
+	// XXX We should probably peak at limits.h and check for this for other architectures...
+	char cstr[11]; // LONG_MAX for 32-bit is 2,147,483,647 -> 10 chars + 1 for NUL
+	ldiv_t divResult;
+	long timeDelta = this->getTime();
+	if (timeDelta < 0) {
+		timeString.assign("???");
+		return false;
+	}
+	divResult = ldiv(timeDelta, 1000);
+	_ltoa_s(divResult.quot, cstr,
+		    10,  // length of cstr buffer XXX (minus NUL, I think)
+			10); // radix
+	timeString.assign(cstr);
+	_ltoa_s(divResult.rem / 100, // truncate remainder to tenths of a second
+		    cstr, 10, // XXX should only need 1, actually... 
+			10);
+	timeString.append(".").append(cstr);
+	return true;
+}
+
+// Return the time in deciseconds.  That's right, deciseconds.
+void Game::resetTimer(void)
+{
+	this->m_timer = gRenderer.getTime();
 }
 
 /// This is used to help spawn objects.
