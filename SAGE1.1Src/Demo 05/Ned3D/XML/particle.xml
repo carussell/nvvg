@@ -181,7 +181,34 @@
       <particlefade fadein=".1" fadeout=".4" fademax=".2" />
     </effect>
   </system>
-    
+  <system name="silosmokeveryheavy" numcopies="2" >
+    <effect name="smokegrey" particleCount="300" textureName="particle01.png">
+      <emit rate="300" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="2.0" />
+      <particlespeed value="6" />
+      <particlecolor value="100, 130, 130, 130" />
+      <particlesize value="3.0" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+    <effect name="smokeblack" particleCount="300" textureName="particle01.png">
+      <emit rate="500" shape="solidsphere" />
+      <cycle value="1" />
+      <sort value="1" />
+      <gravity value="0, 1, 0" />
+      <position value="0, 5, 0" />
+      <particlelife value="5.0" />
+      <particlespeed value="8" />
+      <particlecolor value="100, 40, 40, 40" />
+      <particlesize value="2.5" />
+      <particledrag value=".4" />
+      <particlefade fadein=".1" fadeout=".4" fademax=".2" />
+    </effect>
+  </system>  
   <system name="smokeveryheavy" numcopies="2" >    
     <effect name="smokegrey" particleCount="300" textureName="particle01.png">
       <emit rate="300" shape="solidsphere" />

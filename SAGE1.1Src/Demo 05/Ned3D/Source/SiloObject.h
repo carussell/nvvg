@@ -45,6 +45,16 @@ public:
   virtual void move(float dt);
 
 protected:
+/*	/// \brief Array of all smoke particle engines the plane uses
+  /// The plane smoke trail is set to the particle system that is located at
+  /// index m_hp.
+  /// For instance, if m_hp is 1, m_allParticles[1] will be set
+  std::vector<std::string> m_allParticles; 
+  int m_smokeID; ///< Handle to the smoke particle system (-1 if there isn't one)
+
+   /// \brief Sets the texture of the model and the smoke particle system based
+  /// on the damage the plane has taken
+  void setTextureAndSmoke(); */
 };
 
 #endif
