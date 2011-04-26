@@ -45,6 +45,7 @@
 
 PlaneObject* gPlane;
 
+
 Ned3DObjectManager::Ned3DObjectManager() :
   m_models(NULL),
   m_planeModel(NULL),
@@ -317,10 +318,15 @@ void Ned3DObjectManager::deleteObject(GameObject *object)
     m_terrain = NULL;
   else if(object == m_water)
     m_water = NULL;
+  m_explodingSilos.erase(object);
+  m_buzzedSilos.erase(object);
+  m_ghostSilos.erase(object);
   m_crows.erase(object);
   m_bullets.erase(object);
   m_furniture.erase(object);
   GameObjectManager::deleteObject(object);
+  if (m_buzzedSilos.empty() && m_explodingSilos.empty() && m_ghostSilos.empty())
+	  gPlane->reset();
 }
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo)
