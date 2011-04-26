@@ -35,19 +35,16 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
 {
   this->m_className = "BuzzedSilo";
   this->m_type = ObjectTypes::BUZZEDSILO;
-<<<<<<< HEAD
   this->m_isBuzzedSiloDead = false;
-=======
 
   this->m_allTextures.resize(1);//somewhat pointless to have in a vector, but it works this way...
   this->m_allTextures[0] = "buzzedcylo.tga"; // when dead
-
->>>>>>> 47b9e939f727d93ecc8e03b35c772dfcf5acb446
 }
 
 void BuzzedSiloObject::kill(void)
 {
 	this->m_isBuzzedSiloDead = true;
+	tag();
 }
 
 void BuzzedSiloObject::tag(void)
