@@ -42,6 +42,16 @@ ExplodingSiloObject::ExplodingSiloObject(Model *m)
   this->m_allParticles.resize(2);
   this->m_allParticles[0] = "silosmokeveryheavy";   // when hp = 0
   this->m_allParticles[1] = "";             // hp > 2
+    // load all textures that will be used on the plane.
+  // Multiple textures are used throughout game play so the plane appears to
+  // "take damage"
+  this->m_allTextures.resize(2);
+  this->m_allTextures[0] = "deadecylo.tga"; // when dead
+  //this->m_allTextures[0] = "ecylo4.tga"; // when dead
+  this->m_allTextures[1] = "ecylo4.tga"; // when alive
+    // cache all these
+  for (int a =0; a < (int)m_allTextures.size(); a++)
+    gRenderer.cacheTextureDX(m_allTextures[a].c_str());
 
 
   //JULIA added for Smokin' Silos
@@ -69,7 +79,7 @@ ExplodingSiloObject::~ExplodingSiloObject()
 {
   // kill particle engine if one is attached
   if (m_smokeID != -1)
-    gParticle.killSystem(m_smokeID);
+	  gParticle.killSystem(m_smokeID);
   m_smokeID = -1;
 
 }
@@ -79,6 +89,13 @@ void ExplodingSiloObject::setTextureAndSmoke()
 {
    
   int smokeIndex = 0; // index into m_allParticles array
+  int textureIndex = 0;// index into m_allTextures array
+      // set texture 
+  int numParts = m_pModel->getPartCount();
+  for (int a = 0; a < numParts; a++)
+    m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());
+   m_pModel->cache();
+
    // remove previous smoke system
    if (m_smokeID != -1)
      gParticle.killSystem(m_smokeID);
@@ -86,7 +103,7 @@ void ExplodingSiloObject::setTextureAndSmoke()
    {
      m_smokeID = gParticle.createSystem(m_allParticles[smokeIndex]);
 	 //need to change m_enginePosition to silo
-     gParticle.setSystemPos(m_smokeID, transformObjectToInertial(m_enginePosition));
+     //smokeEngine.setSystemPos(m_smokeID, transformObjectToInertial(m_enginePosition));
 	 gParticle.setSystemPos(m_smokeID, transformObjectToInertial(m_topPosition));
    }
 }

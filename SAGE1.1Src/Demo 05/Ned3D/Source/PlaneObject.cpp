@@ -61,7 +61,7 @@ PlaneObject::PlaneObject(Model *m):
   setModelOrientation(EulerAngles(kPi, 0.0f, 0.0f));
   setPosition(0,m_propOffset,0,1);
   m_fSpeed = 0.0f;
-  m_maxSpeed = 1.0f;
+  m_maxSpeed = 5.0f;
   m_className = "Plane";
   m_type = ObjectTypes::PLANE;
   m_pitchRate = m_turnRate = 0.0f;
@@ -211,7 +211,7 @@ void PlaneObject::process(float dt)
   if (gInput.joyEnabled())
   {
     // set plane speed based on slider
-    float speed = 1.0f;
+    float speed = 5.0f;
     if (gInput.joySlider(&speed))
     {
       // if there is a slider
@@ -484,9 +484,9 @@ void PlaneObject::inputFire()
 
 void PlaneObject::killPlane()
 {
-  //m_planeState = PS_DEAD;
- // m_isPlaneAlive = false;
-	reset();
+  m_planeState = PS_DEAD;
+  m_isPlaneAlive = false;
+	//reset();
 }
 
 bool PlaneObject::isPlaneAlive() const
