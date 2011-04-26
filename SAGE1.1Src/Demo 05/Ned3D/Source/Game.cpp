@@ -140,8 +140,8 @@ bool Game::initiate()
     (0.0f,terrain->getHeight(0.0f,0.0f) + 10.0f,0.0f));
 
   // Load silos
-  
-	srand(Random.getInt());
+	time_t t = 100;
+	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
 		float rx = (float) (rand()%1280-640);
