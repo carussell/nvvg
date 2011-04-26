@@ -86,7 +86,7 @@ bool Game::consoleTimerReset(ParameterList* params, std::string* errorMessage)
 bool Game::consoleTimerPrint(ParameterList* params, std::string* errorMessage)
 {
 	std::string timeString;
-	gGame.timeToString(timeString);
+	gGame.timeToString(gGame.getTime() + 30000, timeString);
 	gConsole.printLine(timeString);
 	return true;
 }
@@ -383,25 +383,26 @@ long Game::getTime(void)
 	return gRenderer.getTime() - this->m_timer;
 }
 
-// Returns false if the timer wrapped around.
-bool Game::timeToString(std::string& timeString)
+// Returns false if timeInMillis is negative.  The reason it doesn't just take an unsigned
+// parameter is so that you can do |timeToString(getTime(), timeString)| without having to
+// store and check the return value from getTime().
+bool Game::timeToString(long timeInMillis, std::string& timeString)
 {
-	// XXX We should probably peak at limits.h and check for this for other architectures...
+	// XXX We should probably peak at limits.h and check LONG_MAX to play nice
+	// with other architectures...
 	char cstr[11]; // LONG_MAX for 32-bit is 2,147,483,647 -> 10 chars + 1 for NUL
 	ldiv_t divResult;
-	long timeDelta = this->getTime();
-	if (timeDelta < 0) {
+	if (timeInMillis < 0) {
 		timeString.assign("???");
 		return false;
 	}
-	divResult = ldiv(timeDelta, 1000);
+	divResult = ldiv(timeInMillis, 1000);
 	_ltoa_s(divResult.quot, cstr,
 		    10,  // length of cstr buffer XXX (minus NUL, I think)
 			10); // radix
 	timeString.assign(cstr);
 	_ltoa_s(divResult.rem / 100, // truncate remainder to tenths of a second
-		    cstr, 10, // XXX should only need 1, actually... 
-			10);
+		    cstr, 1, 10);
 	timeString.append(".").append(cstr);
 	return true;
 }
