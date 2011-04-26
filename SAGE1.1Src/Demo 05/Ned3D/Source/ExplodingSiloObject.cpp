@@ -40,16 +40,16 @@ ExplodingSiloObject::ExplodingSiloObject(Model *m)
   this->m_type = ObjectTypes::EXPLODINGSILO;
   this->m_smokeID = -1;
   this->m_allParticles.resize(2);
-  this->m_allParticles[0] = "silosmokeveryheavy";   // when hp = 0
+  this->m_allParticles[0] = "planeexplosion";   // when hp = 0
   this->m_allParticles[1] = "";             // hp > 2
-    // load all textures that will be used on the plane.
-  // Multiple textures are used throughout game play so the plane appears to
+  // load all textures that will be used on the plane.
+  // Multiple textures are used throughout game play so the silos appear to
   // "take damage"
   this->m_allTextures.resize(2);
   this->m_allTextures[0] = "deadecylo.tga"; // when dead
   //this->m_allTextures[0] = "ecylo4.tga"; // when dead
   this->m_allTextures[1] = "ecylo4.tga"; // when alive
-    // cache all these
+  // cache all these
   for (int a =0; a < (int)m_allTextures.size(); a++)
     gRenderer.cacheTextureDX(m_allTextures[a].c_str());
 
