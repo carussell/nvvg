@@ -379,7 +379,7 @@ bool Ned3DObjectManager::interactPlaneCrow(PlaneObject &plane, CrowObject &crow)
   if(collided && !crow.isDying())
   {
     shootCrow(crow);
-    plane.damage(1);
+    //plane.damage(1);
   }
   return collided;
 }
@@ -405,8 +405,8 @@ bool Ned3DObjectManager::interactPlaneTerrain(PlaneObject &plane, TerrainObject 
       || plane.isCrashing())
     { 
       plane.killPlane();
-      int partHndl = gParticle.createSystem("planeexplosion");
-      gParticle.setSystemPos(partHndl, plane.getPosition());
+      //int partHndl = gParticle.createSystem("planeexplosion");
+     // gParticle.setSystemPos(partHndl, plane.getPosition());
       plane.setSpeed(0.0f);
       planePos += 2.0f * viewVector;
       planeOrient.pitch = kPi / 4.0f;
@@ -446,8 +446,8 @@ bool Ned3DObjectManager::interactPlaneWater(PlaneObject &plane, WaterObject &wat
     plane.setOrientation(planeOrient);
     plane.setPosition(planePos);
     
-    int partHndl = gParticle.createSystem("planeexplosion");
-    gParticle.setSystemPos(partHndl, plane.getPosition());
+  //  int partHndl = gParticle.createSystem("planeexplosion");
+   // gParticle.setSystemPos(partHndl, plane.getPosition());
     return true;
   }
   return false;

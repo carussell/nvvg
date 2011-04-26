@@ -485,7 +485,7 @@ void PlaneObject::inputFire()
 void PlaneObject::killPlane()
 {
   //m_planeState = PS_DEAD;
-  //m_isPlaneAlive = false;
+ // m_isPlaneAlive = false;
 	reset();
 }
 

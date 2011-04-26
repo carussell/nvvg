@@ -308,10 +308,18 @@ void Game::resetGame()
   m_tetherCamera->setTargetObject(planeID);
 
   // Load silos
-  objects->spawnSilo(LocationOnterrain(-30.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(-10.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(10.0f, 10.0f, 100.0f));
-  objects->spawnSilo(LocationOnterrain(30.0f, 10.0f, 100.0f));
+	time_t t = 100;
+	srand(gRenderer.getTime());
+	float wh = water->getWaterHeight();
+	for (int i=0; i< 10; i++){
+		float rx = (float) (rand()%1280-640);
+		float rz = (float) (rand()%1280-640);
+		float th = terrain->getHeight(rx, rz);
+		if (th <= wh)
+			i--;
+		else
+			objects->spawnSilo(LocationOnterrain(rx, 10.0f, rz));
+	}
 
   // Load windmill
   unsigned int windmillID = objects->spawnWindmill(LocationOnterrain(60.0f, 0.0f, 100.0f));
