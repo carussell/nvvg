@@ -69,9 +69,16 @@ public:
   void process(); ///< Called once a frame by GameBase::Main()
 
   void resetGame();
+  
+  // Returns the time in deciseconds.  Yes, deciseconds.
+  long getTime(void);
+  bool timeToString(std::string& timeString);
+  void resetTimer(void);
 
   static bool consoleSetFollowCamera(ParameterList* params,std::string* errorMessage);
   static bool consoleSetCameraTarget(ParameterList* params,std::string* errorMessage);
+  static bool consoleTimerReset(ParameterList* params, std::string* errorMessage);
+  static bool consoleTimerPrint(ParameterList* params, std::string* errorMessage);
   Ned3DObjectManager* objects;
 
 private:
@@ -85,6 +92,9 @@ private:
   Vector3 LocationOnterrain(float x, float y, float z);  
 
    //void SetSilos(int amount);
+
+  // Time in milliseconds.
+  long m_timer;
 }; 
 
 extern Game gGame; // extern a global instance of this object
