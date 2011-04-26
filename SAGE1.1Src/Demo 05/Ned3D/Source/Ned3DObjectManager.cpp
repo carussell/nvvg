@@ -44,6 +44,8 @@
 #include "BuzzedSiloObject.h"
 
 PlaneObject* gPlane;
+int siloCount = 0;
+
 
 Ned3DObjectManager::Ned3DObjectManager() :
   m_models(NULL),
@@ -108,7 +110,7 @@ void Ned3DObjectManager::handleInteractions()
 	bool noSilo = true;
 	for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
 		ExplodingSiloObject &silo = (ExplodingSiloObject &)**esit;
-		interactBulletExplodingSilo(silo, bullet);
+		interactBulletExplodingSilo(silo, bullet, *m_plane);
 		noSilo = false;
 	}
     GameObject *victim = bullet.getVictim();
@@ -235,6 +237,7 @@ unsigned int Ned3DObjectManager::spawnSilo(const Vector3 &position, const EulerA
 {
   static const std::string silos[] = {"eSilo1","eSilo2","eSilo3","eSilo4", "gSilo1", "gSilo2", 
 										"gSilo3", "gSilo4", "bSilo1", "bSilo2"};
+  siloCount = siloCount++;
   unsigned int id = -1;
   static int whichSilo = 0;
   m_siloModel = m_models->getModelPointer(silos[whichSilo]); // Cache silo model
@@ -263,6 +266,7 @@ unsigned int Ned3DObjectManager::spawnSilo(const Vector3 &position, const EulerA
 	m_buzzedSilos.insert(silo);
   }
   whichSilo = ++whichSilo % 10;
+  
   return id;
 }
 
@@ -329,13 +333,19 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 	bool buzzed = false;
 	if (collided) {
 		buzzedSilo.kill();
-		plane.killPlane();
+		//plane.reset();
+		siloCount--;		
+		if (siloCount < 1)
+			plane.killPlane();
 	}
 	else {
 		buzzed = buzzedObject(plane, buzzedSilo);
 		if (buzzed){
 			//mark silo
 			buzzedSilo.kill();
+			siloCount = siloCount--;		
+			if (siloCount == 1)
+				plane.killPlane();
 		}
 	}
 	return (collided || buzzed);
@@ -344,9 +354,14 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo)
 {
+	if (ghostSilo.m_isGhostSiloDead)
+		false;
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
 		ghostSilo.kill();
+		siloCount = siloCount--;		
+		if (siloCount == 1)
+			plane.killPlane();
 	}
 	return collided;
 }
@@ -357,18 +372,23 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
 		explodingSilo.kill();
-		plane.killPlane();
+		//plane.reset();
+		siloCount = siloCount--;		
+		if (siloCount == 1)
+			plane.killPlane();
 	}
 	return collided;
 }
 
 /** NEW STUFF **/
-bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet)
+bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet, PlaneObject &plane)
 {
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
-		//explodingSilo.kill();
-		explodingSilo.smoke();
+		explodingSilo.kill();	
+		siloCount = siloCount--;		
+		if (siloCount == 1)
+			plane.killPlane();
 	}
 	return collided;
 }		
@@ -404,7 +424,7 @@ bool Ned3DObjectManager::interactPlaneTerrain(PlaneObject &plane, TerrainObject 
     if(viewVector * terr->getNormal(planePos.x,planePos.z) < -0.5f // dot product
       || plane.isCrashing())
     { 
-      plane.killPlane();
+      //plane.killPlane();
       //int partHndl = gParticle.createSystem("planeexplosion");
      // gParticle.setSystemPos(partHndl, plane.getPosition());
       plane.setSpeed(0.0f);
@@ -438,7 +458,7 @@ bool Ned3DObjectManager::interactPlaneWater(PlaneObject &plane, WaterObject &wat
   if(plane.isPlaneAlive() && planeBottom < waterHeight)
   { //collision
     Vector3 viewVector = planeMatrix.objectToInertial(Vector3(0,0,1));
-    plane.killPlane();
+   // plane.killPlane();
     plane.setSpeed(0.0f);
     planePos += 2.0f * viewVector;
     planeOrient.pitch = kPi / 4.0f;

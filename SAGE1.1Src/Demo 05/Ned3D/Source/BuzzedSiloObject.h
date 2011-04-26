@@ -41,12 +41,17 @@ public:
   
   BuzzedSiloObject(Model *m);
   virtual void kill(void);
-  //virtual void tag(void);
+  bool m_isBuzzedSiloDead;
+
+  virtual void tag(void);
+
 
 protected:
 	//holds the textures silos will turn
 	std::vector<std::string> m_allTextures; 
 	void setTexture();
+	int m_textureID;
+
 };
 
 #endif

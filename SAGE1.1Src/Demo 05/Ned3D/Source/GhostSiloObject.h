@@ -42,6 +42,8 @@ public:
   GhostSiloObject(Model *m);
   
   virtual void kill(void);
+
+  bool m_isGhostSiloDead;
 };
 
 #endif

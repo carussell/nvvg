@@ -140,7 +140,7 @@ class Ned3DObjectManager : public GameObjectManager
 	  bool interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo);
 	  bool interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo);
 	  bool interactPlaneExplodingSilo(PlaneObject &plane, ExplodingSiloObject &explodingSilo);
-	  bool interactBulletExplodingSilo(ExplodingSiloObject &badSilo, BulletObject &bullet);
+	  bool interactBulletExplodingSilo(ExplodingSiloObject &badSilo, BulletObject &bullet, PlaneObject &plane);
     bool interactPlaneCrow(PlaneObject &plane, CrowObject &crow); ///< Handles plane-crow interactions, such as collision
     bool interactPlaneTerrain(PlaneObject &plane, TerrainObject &terrain); ///< Handles possible plane-terrain collision
     bool interactPlaneWater(PlaneObject &plane, WaterObject &water); ///< Handles possible plane-water collision
