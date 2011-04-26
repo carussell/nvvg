@@ -367,7 +367,8 @@ bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explod
 {
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
-		explodingSilo.kill();
+		//explodingSilo.kill();
+		explodingSilo.smoke();
 	}
 	return collided;
 }		

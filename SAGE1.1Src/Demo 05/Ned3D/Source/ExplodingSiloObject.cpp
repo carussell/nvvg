@@ -29,16 +29,65 @@
  *--o0o=================================================================o0o--*/
 
 #include "ExplodingSiloObject.h"
-
+#include "Particle/ParticleEngine.h"
 
 ExplodingSiloObject::ExplodingSiloObject(Model *m)
-  : SiloObject(m)
+  : SiloObject(m),
+  m_enginePosition(0,10.0f, 10.0f),//should be renamed to top and position changed
+  m_topPosition(0, 10.0f, 9.0f)
 {
   this->m_className = "ExplodingSilo";
   this->m_type = ObjectTypes::EXPLODINGSILO;
+  this->m_smokeID = -1;
+  this->m_allParticles.resize(2);
+  this->m_allParticles[0] = "silosmokeveryheavy";   // when hp = 0
+  this->m_allParticles[1] = "";             // hp > 2
+
+
+  //JULIA added for Smokin' Silos
+  //m_allParticles.resize(2);
+ // m_allParticles[0] = "smokeveryheavy";   // when hp = 0
+  //m_allParticles[1] = "smokeheavy";   // when hp = 0
+  
 }
 
+/*
+//old
 void ExplodingSiloObject::kill(void)
 {
+}*/
+void ExplodingSiloObject::kill(void)
+{
+	
+}
+ void ExplodingSiloObject::smoke(void)
+ {
+	 this->m_smokeID = 0;
+	setTextureAndSmoke();
+ }
+ExplodingSiloObject::~ExplodingSiloObject()
+{
+  // kill particle engine if one is attached
+  if (m_smokeID != -1)
+    gParticle.killSystem(m_smokeID);
+  m_smokeID = -1;
+
+}
+//unlike plane's smoke, this will be called on death and 
+// will make smoke appear
+void ExplodingSiloObject::setTextureAndSmoke()
+{
+   
+  int smokeIndex = 0; // index into m_allParticles array
+   // remove previous smoke system
+   if (m_smokeID != -1)
+     gParticle.killSystem(m_smokeID);
+   if (m_allParticles[smokeIndex] != "")
+   {
+     m_smokeID = gParticle.createSystem(m_allParticles[smokeIndex]);
+	 //need to change m_enginePosition to silo
+     gParticle.setSystemPos(m_smokeID, transformObjectToInertial(m_enginePosition));
+	 gParticle.setSystemPos(m_smokeID, transformObjectToInertial(m_topPosition));
+   }
 }
 

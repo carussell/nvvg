@@ -39,6 +39,13 @@ SiloObject::SiloObject(Model *m)
   assert(m->getPartCount() >= 1);
   m_className = "Silo";
   m_type = ObjectTypes::SILO;
+  //m_smokeID = -1;
+
+  //m_allParticles.resize(2);
+  //m_allParticles[0] = "smokeveryheavy";   // when hp = 0
+  //m_allParticles[1] = "";             // hp > 2
+
+  //setTextureAndSmoke();
 }
 
 void SiloObject::process(float dt)
@@ -49,3 +56,34 @@ void SiloObject::move(float dt)
 {
   GameObject::move(dt);
 }
+/*
+SiloObject::~SiloObject()
+{
+  // kill particle engine if one is attached
+  if (m_smokeID != -1)
+    gParticle.killSystem(m_smokeID);
+  m_smokeID = -1;
+
+}
+//unlike plane's smoke, this will be called on death and 
+// will make smoke appear
+void SiloObject::setTextureAndSmoke()
+{
+   
+  int smokeIndex = m_hp; // index into m_allParticles array
+  // make sure the indicies are in range
+  if (smokeIndex >= (int)m_allParticles.size())
+    smokeIndex = (int)m_allParticles.size() - 1;
+  if (smokeIndex < 0) smokeIndex = 0;
+
+   // remove previous smoke system
+   if (m_smokeID != -1)
+     gParticle.killSystem(m_smokeID);
+   if (m_allParticles[smokeIndex] != "")
+   {
+     m_smokeID = gParticle.createSystem(m_allParticles[smokeIndex]);
+	 //need to change m_enginePosition to silo
+     gParticle.setSystemPos(m_smokeID, transformObjectToInertial(m_enginePosition));
+   }
+}
+*/
