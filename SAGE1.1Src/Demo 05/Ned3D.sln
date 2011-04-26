@@ -1,12 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ned3D", "Ned3D\Ned3D.vcproj", "{2645FD08-3441-471F-9048-3E77D8E3B396}"
-	ProjectSection(ProjectDependencies) = postProject
-		{85445FFC-2A3C-4015-BD42-9BDE97603CA9} = {85445FFC-2A3C-4015-BD42-9BDE97603CA9}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ned3D", "Ned3D\Ned3D.vcxproj", "{2645FD08-3441-471F-9048-3E77D8E3B396}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SAGE", "SAGE\Sage.vcproj", "{85445FFC-2A3C-4015-BD42-9BDE97603CA9}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sage", "SAGE\Sage.vcxproj", "{85445FFC-2A3C-4015-BD42-9BDE97603CA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
