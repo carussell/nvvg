@@ -45,10 +45,6 @@ void BuzzedSiloObject::kill(void)
 {
 }
 
-void BuzzedSiloObject::tag(void)
-{
-	setTexture();
-}
 void BuzzedSiloObject::setTexture()
 {
   int textureIndex = 0;// index into m_allTextures array

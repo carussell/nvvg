@@ -41,7 +41,7 @@ public:
   
   BuzzedSiloObject(Model *m);
   virtual void kill(void);
-  virtual void tag(void);
+  //virtual void tag(void);
 
 protected:
 	//holds the textures silos will turn
