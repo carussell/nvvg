@@ -328,6 +328,8 @@ void Ned3DObjectManager::deleteObject(GameObject *object)
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo)
 {
+	if (buzzedSilo.m_isBuzzedSiloDead)
+		return false;
 	bool collided = enforcePositions(plane, buzzedSilo);
 	bool buzzed = false;
 	if (collided) {
@@ -343,7 +345,7 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 			//mark silo
 			buzzedSilo.kill();
 			m_siloCount = m_siloCount--;		
-			if (m_siloCount == 1)
+			if (m_siloCount < 1)
 				plane.killPlane();
 		}
 	}
@@ -359,7 +361,7 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 	if (collided) {
 		ghostSilo.kill();
 		m_siloCount = m_siloCount--;		
-		if (m_siloCount == 1)
+		if (m_siloCount < 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -368,12 +370,14 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, ExplodingSiloObject &explodingSilo)
 {
+	if (explodingSilo.m_isExplodingSiloDead)
+		return false;
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
 		explodingSilo.kill();
 		//plane.reset();
 		m_siloCount = m_siloCount--;		
-		if (m_siloCount == 1)
+		if (m_siloCount < 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -382,11 +386,13 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explodingSilo, BulletObject &bullet, PlaneObject &plane)
 {
+	if (explodingSilo.m_isExplodingSiloDead)
+		return false;
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
 		explodingSilo.kill();	
 		m_siloCount = m_siloCount--;		
-		if (m_siloCount == 1)
+		if (m_siloCount < 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -520,15 +526,15 @@ void Ned3DObjectManager::shootCrow(CrowObject &crow)
 
 bool Ned3DObjectManager::buzzedObject(GameObject &moving, GameObject &stationary)
 {
-  const AABB3 &box1 = moving.getBoundingBox(), &box2 = stationary.getBoundingBox();
-  AABB3 intersectBox;
+  const AABB3 box1 = moving.getBoundingBox(), box2 = stationary.getBoundingBox();
+  AABB3 intersectBox = AABB3();
   AABB3 otherBox;
   float minZ = box2.max.z;
-  float height = minZ - box1.min.z;
+  float height = box2.max.z - box2.min.z;
   const Vector3 obj1Pos = Vector3(box2.min.x, box2.min.y, minZ);
   const Vector3 obj2Pos = Vector3(box2.max.x, box2.max.y, minZ+height);
   intersectBox.min.set(obj1Pos);
-  intersectBox.min.set(obj2Pos);
+  intersectBox.max.set(obj2Pos);
   if(AABB3::intersect(box1, intersectBox, &otherBox))
 	  return true;
   return false;
