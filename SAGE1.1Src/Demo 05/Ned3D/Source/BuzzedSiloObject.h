@@ -49,9 +49,7 @@ public:
 protected:
 	//holds the textures silos will turn
 	std::vector<std::string> m_allTextures; 
-	void setTexture();
-	int m_textureID;
-
+	void setTexture( int textNdx);
 };
 
 #endif

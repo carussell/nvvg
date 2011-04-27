@@ -72,7 +72,7 @@ public:
   
   // Returns the time in deciseconds.  Yes, deciseconds.
   long getTime(void);
-  bool timeToString(std::string& timeString);
+  bool timeToString(long timeInMillis, std::string& timeString);
   void resetTimer(void);
 
   static bool consoleSetFollowCamera(ParameterList* params,std::string* errorMessage);

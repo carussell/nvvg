@@ -37,11 +37,13 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
   this->m_type = ObjectTypes::BUZZEDSILO;
   this->m_isBuzzedSiloDead = false;
 
-  this->m_allTextures.resize(1);//somewhat pointless to have in a vector, but it works this way...
+  this->m_allTextures.resize(2);
   this->m_allTextures[0] = "buzzedcylo.tga"; // when dead
+  this->m_allTextures[1] = "bcylo2.tga";
   for (int a =0; a < (int)m_allTextures.size(); a++)
     gRenderer.cacheTextureDX(m_allTextures[a].c_str());
-  this->m_textureID = -1;
+  //setting texture back to original exploding silo
+  setTexture(1);
 
 }
 
@@ -53,13 +55,18 @@ void BuzzedSiloObject::kill(void)
 
 void BuzzedSiloObject::tag(void)
 {
-	setTexture();
+	setTexture(0);
 }
 
-void BuzzedSiloObject::setTexture()
+void BuzzedSiloObject::setTexture(int textNdx)
 {
-  int textureIndex = 0;// index into m_allTextures array
+  int textureIndex = textNdx;// index into m_allTextures array
       // set texture 
+  // make sure the indicies are in range
+  if (textureIndex >= (int)m_allTextures.size())
+    textureIndex = (int)m_allTextures.size() - 1;
+  if (textureIndex < 0) textureIndex = 0;
+
   int numParts = m_pModel->getPartCount();
   for (int a = 0; a < numParts; a++)
     m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());

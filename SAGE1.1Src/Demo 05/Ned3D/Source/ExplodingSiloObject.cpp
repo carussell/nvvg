@@ -49,11 +49,11 @@ ExplodingSiloObject::ExplodingSiloObject(Model *m)
   this->m_allTextures.resize(2);
   this->m_allTextures[0] = "deadecylo.tga"; // when dead
   //this->m_allTextures[0] = "ecylo4.tga"; // when dead
-  this->m_allTextures[1] = "ecylo4.tga"; // when alive
+  this->m_allTextures[1] = "ecylo2.tga"; // when alive
   // cache all these
   for (int a =0; a < (int)m_allTextures.size(); a++)
     gRenderer.cacheTextureDX(m_allTextures[a].c_str());
-
+  setTexture(1);
 
   //JULIA added for Smokin' Silos
   //m_allParticles.resize(2);
@@ -71,7 +71,8 @@ void ExplodingSiloObject::kill(void)
  void ExplodingSiloObject::smoke(void)
  {
 	 this->m_smokeID = 0;
-	setTextureAndSmoke();
+	setTexture(0);
+	setSmoke();
  }
 ExplodingSiloObject::~ExplodingSiloObject()
 {
@@ -79,22 +80,14 @@ ExplodingSiloObject::~ExplodingSiloObject()
   if (m_smokeID != -1)
 	  gParticle.killSystem(m_smokeID);
   m_smokeID = -1;
-
-
 }
 //unlike plane's smoke, this will be called on death and 
 // will make smoke appear
-void ExplodingSiloObject::setTextureAndSmoke()
+void ExplodingSiloObject::setSmoke()
 {
    
   int smokeIndex = 0; // index into m_allParticles array
-  int textureIndex = 0;// index into m_allTextures array
-      // set texture 
-  int numParts = m_pModel->getPartCount();
-  for (int a = 0; a < numParts; a++)
-    m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());
-   m_pModel->cache();
-
+  
    // remove previous smoke system
    if (m_smokeID != -1)
      gParticle.killSystem(m_smokeID);
@@ -107,3 +100,17 @@ void ExplodingSiloObject::setTextureAndSmoke()
    }
 }
 
+void ExplodingSiloObject::setTexture(int textNdx)
+{
+  int textureIndex = textNdx;// index into m_allTextures array
+
+  // make sure the indicies are in range
+  if (textureIndex >= (int)m_allTextures.size())
+    textureIndex = (int)m_allTextures.size() - 1;
+  if (textureIndex < 0) textureIndex = 0;
+      // set texture 
+  int numParts = m_pModel->getPartCount();
+  for (int a = 0; a < numParts; a++)
+    m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());
+   m_pModel->cache();
+}

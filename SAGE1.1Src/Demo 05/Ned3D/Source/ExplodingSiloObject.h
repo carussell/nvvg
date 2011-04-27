@@ -64,7 +64,8 @@ protected:
 
    /// \brief Sets the texture of the model and the smoke particle system based
   /// on the damage the plane has taken
-  void setTextureAndSmoke();
+  void setTexture(int textNdx);
+  void setSmoke(void);
 };
 
 #endif
