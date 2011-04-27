@@ -265,10 +265,33 @@ void Game::renderScreen()
   }
 
   gConsole.render();
+  this->renderTime();
+  this->renderSiloCount();
   if (GameBase::m_renderInfo)
     GameBase::renderInfo();  
 }
 
+void Game::renderSiloCount(void)
+{
+  	// XXX magic numbers
+	char countStr[4];
+	int right = gRenderer.getScreenX() - 1;
+	IRectangle rect = IRectangle(right - 128 - 16, 56, right - 16, 89);
+	// XXX getSiloCount doesn't return a long
+	_ltoa_s(objects->getSiloCount(), // truncate remainder to tenths of a second
+		    countStr, 3, 10);
+	gRenderer.drawText(countStr, &rect, eTextAlignModeRight, false);
+}
+
+void Game::renderTime(void)
+{
+	// XXX Magic numbers all over the place.
+	std::string timeString;
+	int right = gRenderer.getScreenX() - 1;
+	IRectangle rect = IRectangle(right - 128 - 16, 16, right - 16, 48);
+	this->timeToString(this->getTime(), timeString);
+	gRenderer.drawText(timeString.c_str(), &rect, eTextAlignModeRight, false);
+}
 
 void Game::process()
 {
@@ -402,7 +425,7 @@ bool Game::timeToString(long timeInMillis, std::string& timeString)
 			10); // radix
 	timeString.assign(cstr);
 	_ltoa_s(divResult.rem / 100, // truncate remainder to tenths of a second
-		    cstr, 1, 10);
+		    cstr, 2, 10);
 	timeString.append(".").append(cstr);
 	return true;
 }

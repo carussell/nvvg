@@ -91,7 +91,10 @@ private:
   /// to the terrain.
   Vector3 LocationOnterrain(float x, float y, float z);  
 
-   //void SetSilos(int amount);
+  void renderSiloCount(void);
+  //void SetSilos(int amount);
+
+  void renderTime(void);
 
   // Time in milliseconds.
   long m_timer;

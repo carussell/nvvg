@@ -135,6 +135,8 @@ class Ned3DObjectManager : public GameObjectManager
     /// \param object Pointer to the object to be deleted.
     virtual void deleteObject(GameObject *object);
 
+	int getSiloCount(void) { return this->m_siloCount; }
+
   protected:
 	  /** new code **/
 	  bool interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObject &ghostSilo);
@@ -174,6 +176,8 @@ class Ned3DObjectManager : public GameObjectManager
     TerrainObject *m_terrain; ///> Points to the sole terrain object.  (not owned)
     WaterObject *m_water; ///> Points to the sole water object.  (not owned)
     ObjectSet m_furniture; ///> Silos, windmills, etc.
+
+	int m_siloCount;
 };
 
 
