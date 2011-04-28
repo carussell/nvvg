@@ -336,6 +336,9 @@ void Game::process()
     water->m_reflection.endReflectedScene();    
   }
 
+  if (objects->getSiloCount() < 1) {
+    objects->getPlaneObject()->killPlane();
+  }
 }
 
 void Game::resetGame()
