@@ -53,13 +53,14 @@ class Water;
 class ExplodingSiloObject;
 class BuzzedSiloObject;
 class GhostSiloObject;
+class Game;
 
 /// \brief Derived object manager to handle Ned3D objects specifically.
 class Ned3DObjectManager : public GameObjectManager
 {
   public:
     
-    Ned3DObjectManager(); ///< Constructs a Ned3DObjectManager.
+    Ned3DObjectManager(Game *game); ///< Constructs a Ned3DObjectManager.
     
     /// \brief Tells the object manager which model manager to use.
     /// \param models The model manager to use for the objects.
@@ -158,6 +159,8 @@ class Ned3DObjectManager : public GameObjectManager
     bool enforcePositions(GameObject &obj1, GameObject &obj2); ///< Blocks two moving objects from intersecting each other.
     
     // Ned3D-specific references
+
+	Game *m_game;
     
     ModelManager *m_models; ///< Pointer to the model manager to be used when creating objects.
 

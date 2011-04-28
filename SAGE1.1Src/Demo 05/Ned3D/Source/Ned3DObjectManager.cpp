@@ -42,10 +42,11 @@
 #include "ExplodingSiloObject.h"
 #include "GhostSiloObject.h"
 #include "BuzzedSiloObject.h"
+#include "Game.h"
 
 PlaneObject* gPlane;
 
-Ned3DObjectManager::Ned3DObjectManager() :
+Ned3DObjectManager::Ned3DObjectManager(Game *game = NULL) :
   m_models(NULL),
   m_planeModel(NULL),
   m_crowModel(NULL),
@@ -57,6 +58,7 @@ Ned3DObjectManager::Ned3DObjectManager() :
   m_water(NULL),
   m_siloCount(0)
 {
+	this->m_game = game;
 }
 
 void Ned3DObjectManager::setModelManager(ModelManager &models)

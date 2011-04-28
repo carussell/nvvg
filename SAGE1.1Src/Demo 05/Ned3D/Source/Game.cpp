@@ -116,7 +116,7 @@ bool Game::initiate()
   // Set far clipping plane
   gRenderer.setNearFarClippingPlanes(1.0f,farClippingPlane);
 
-  objects = new Ned3DObjectManager();
+  objects = new Ned3DObjectManager(this);
   objects->setNumberOfDeadFrames(2);
   m_tetherCamera = new TetherCamera(objects);
 	
