@@ -74,6 +74,7 @@ public:
   long getTime(void);
   bool timeToString(long timeInMillis, std::string& timeString);
   void resetTimer(void);
+  void addPenalty(long time);
 
   static bool consoleSetFollowCamera(ParameterList* params,std::string* errorMessage);
   static bool consoleSetCameraTarget(ParameterList* params,std::string* errorMessage);
@@ -98,6 +99,8 @@ private:
 
   // Time in milliseconds.
   long m_timer;
+
+  long m_timePenalty;
 }; 
 
 extern Game gGame; // extern a global instance of this object
