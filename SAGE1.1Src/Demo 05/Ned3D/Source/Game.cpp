@@ -293,6 +293,12 @@ void Game::renderTime(void)
 	gRenderer.drawText(timeString.c_str(), &rect, eTextAlignModeRight, false);
 }
 
+void Game::newGame()
+{
+	shutdown();
+	initiate();
+}
+
 void Game::process()
 {
   float dt = gRenderer.getTimeStep();
@@ -321,7 +327,7 @@ void Game::process()
   if (gInput.keyJustUp(DIK_SPACE))
     if (objects->getPlaneObject()->isPlaneAlive() == false)
     {
-      resetGame();
+      newGame();
       return;
     } 
 
@@ -340,6 +346,7 @@ void Game::process()
     objects->getPlaneObject()->killPlane();
   }
 }
+
 
 void Game::resetGame()
 { 

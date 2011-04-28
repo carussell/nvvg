@@ -67,7 +67,7 @@ public:
 	void renderScene(bool asReflection = false);
   
   void process(); ///< Called once a frame by GameBase::Main()
-
+  void newGame();
   void resetGame();
   
   // Returns the time in deciseconds.  Yes, deciseconds.
