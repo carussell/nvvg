@@ -328,13 +328,13 @@ void Ned3DObjectManager::deleteObject(GameObject *object)
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloObject &buzzedSilo)
 {
-	if (buzzedSilo.m_isBuzzedSiloDead)
-		return false;
 	bool collided = enforcePositions(plane, buzzedSilo);
 	bool buzzed = false;
 	if (collided) {
+		if (buzzedSilo.m_isBuzzedSiloDead)
+			return false;
 		buzzedSilo.kill();
-		//plane.reset();
+		plane.reset();
 		m_siloCount--;		
 		if (m_siloCount < 1)
 			plane.killPlane();
@@ -369,14 +369,14 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 
 /** NEW STUFF **/
 bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, ExplodingSiloObject &explodingSilo)
-{
-	if (explodingSilo.m_isExplodingSiloDead)
-		return false;
+{		
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
+		plane.reset();
+		if (explodingSilo.m_isExplodingSiloDead)
+			return false;
 		explodingSilo.kill();
-		//plane.reset();
-		m_siloCount = m_siloCount--;		
+		m_siloCount = m_siloCount--;			
 		if (m_siloCount < 1)
 			plane.killPlane();
 	}
