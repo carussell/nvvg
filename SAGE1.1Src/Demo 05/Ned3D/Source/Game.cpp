@@ -430,10 +430,14 @@ bool Game::timeToString(long timeInMillis, std::string& timeString)
 	return true;
 }
 
-// Return the time in deciseconds.  That's right, deciseconds.
 void Game::resetTimer(void)
 {
 	this->m_timer = gRenderer.getTime();
+}
+
+void Game::addPenalty(long time)
+{
+	this->m_timePenalty += time;
 }
 
 /// This is used to help spawn objects.
