@@ -345,9 +345,7 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 			return false;
 		buzzedSilo.kill();
 		plane.reset();
-		m_siloCount--;		
-		if (m_siloCount < 1)
-			plane.killPlane();
+		m_siloCount--;
 	}
 	else {
 		buzzed = buzzedObject(plane, buzzedSilo);
@@ -356,9 +354,7 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 				return false;
 			//mark silo
 			buzzedSilo.kill();
-			m_siloCount = m_siloCount--;		
-			if (m_siloCount < 1)
-				plane.killPlane();
+			m_siloCount = m_siloCount--;
 		}
 	}
 	return (collided || buzzed);
@@ -372,9 +368,7 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
 		ghostSilo.kill();
-		m_siloCount = m_siloCount--;		
-		if (m_siloCount < 1)
-			plane.killPlane();
+		m_siloCount = m_siloCount--;
 	}
 	return collided;
 }
@@ -389,9 +383,7 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 		if (explodingSilo.m_isExplodingSiloDead)
 			return false;
 		explodingSilo.kill();
-		m_siloCount = m_siloCount--;			
-		if (m_siloCount < 1)
-			plane.killPlane();
+		m_siloCount = m_siloCount--;
 	}
 	return collided;
 }
@@ -404,9 +396,7 @@ bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explod
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
 		explodingSilo.kill();	
-		m_siloCount = m_siloCount--;		
-		if (m_siloCount < 1)
-			plane.killPlane();
+		m_siloCount = m_siloCount--;
 	}
 	return collided;
 }		
