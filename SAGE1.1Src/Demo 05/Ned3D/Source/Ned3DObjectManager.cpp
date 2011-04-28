@@ -256,6 +256,7 @@ unsigned int Ned3DObjectManager::spawnSilo(const Vector3 &position, const EulerA
 	GhostSiloObject *silo = new GhostSiloObject(m_siloModel);
 	silo->setPosition(position);
 	silo->setOrientation(orientation);
+
 	id = addObject(silo);
 	m_ghostSilos.insert(silo);
   }
@@ -344,6 +345,8 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 	else {
 		buzzed = buzzedObject(plane, buzzedSilo);
 		if (buzzed){
+			if (buzzedSilo.m_isBuzzedSiloDead)
+				return false;
 			//mark silo
 			buzzedSilo.kill();
 			m_siloCount = m_siloCount--;		
@@ -528,16 +531,12 @@ void Ned3DObjectManager::shootCrow(CrowObject &crow)
 
 bool Ned3DObjectManager::buzzedObject(GameObject &moving, GameObject &stationary)
 {
-  const AABB3 box1 = moving.getBoundingBox(), box2 = stationary.getBoundingBox();
-  AABB3 intersectBox = AABB3();
+  const AABB3 &box1 = moving.getBoundingBox();
+  AABB3 box2 = stationary.getBoundingBox();
   AABB3 otherBox;
-  float minZ = box2.max.z;
-  float height = box2.max.z - box2.min.z;
-  const Vector3 obj1Pos = Vector3(box2.min.x, box2.min.y, minZ);
-  const Vector3 obj2Pos = Vector3(box2.max.x, box2.max.y, minZ+height);
-  intersectBox.min.set(obj1Pos);
-  intersectBox.max.set(obj2Pos);
-  if(AABB3::intersect(box1, intersectBox, &otherBox))
+  box2.add(Vector3(box2.min.x, box2.max.y + (box2.max.y - box2.min.y), box2.max.z));
+
+  if(AABB3::intersect(box1, box2, &otherBox))
 	  return true;
   return false;
 }
