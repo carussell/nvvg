@@ -86,7 +86,7 @@ bool Game::consoleTimerReset(ParameterList* params, std::string* errorMessage)
 bool Game::consoleTimerPrint(ParameterList* params, std::string* errorMessage)
 {
 	std::string timeString;
-	gGame.timeToString(gGame.getTime() + 30000, timeString);
+	gGame.timeToString(gGame.getTime(), timeString);
 	gConsole.printLine(timeString);
 	return true;
 }
@@ -160,8 +160,8 @@ bool Game::initiate()
 	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
-		float rx = (float) (rand()%1280-640);
-		float rz = (float) (rand()%1280-640);
+		float rx = (float) (rand()%2560-1280);
+		float rz = (float) (rand()%2560-1280);
 		float th = terrain->getHeight(rx, rz);
 		if (th <= wh)
 			i--;
@@ -260,7 +260,7 @@ void Game::renderScreen()
     {
       int textY = gRenderer.getScreenY()/2;
       IRectangle rect = IRectangle(0,textY,gRenderer.getScreenX()-1, textY + 30);
-      gRenderer.drawText("Press \"Space Bar\" to Respawn",&rect, eTextAlignModeCenter, false);
+      gRenderer.drawText("Game Over.  Press \"Space Bar\" to try again!",&rect, eTextAlignModeCenter, false);
     }
   }
 
@@ -354,8 +354,8 @@ void Game::resetGame()
 	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
-		float rx = (float) (rand()%1280-640);
-		float rz = (float) (rand()%1280-640);
+		float rx = (float) (rand()%2560-1280);
+		float rz = (float) (rand()%2560-1280);
 		float th = terrain->getHeight(rx, rz);
 		if (th <= wh)
 			i--;

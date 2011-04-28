@@ -108,14 +108,20 @@ void Ned3DObjectManager::handleInteractions()
       if(!crow.isAlive()) continue;
       interactCrowBullet(crow, bullet);
     }
-	bool noSilo = true;
+	bool noESilo = true;
+	bool noBSilo = true;
 	for(ObjectSetIter esit = m_explodingSilos.begin(); esit != m_explodingSilos.end(); ++esit){
 		ExplodingSiloObject &silo = (ExplodingSiloObject &)**esit;
 		interactBulletExplodingSilo(silo, bullet, *m_plane);
-		noSilo = false;
+		noESilo = false;
+	}
+	for(ObjectSetIter bsit = m_buzzedSilos.begin(); bsit != m_buzzedSilos.end(); ++bsit){
+		BuzzedSiloObject &silo = (BuzzedSiloObject &)**bsit;
+		interactBulletBuzzedSilo(silo, bullet);
+		noBSilo = false;
 	}
     GameObject *victim = bullet.getVictim();
-    if(noSilo && victim != NULL)
+    if(noESilo && noBSilo && victim != NULL)
     {
       // Bullet hit something
       switch(victim->getType())
@@ -334,6 +340,7 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 	bool collided = enforcePositions(plane, buzzedSilo);
 	bool buzzed = false;
 	if (collided) {
+		this->m_game->addPenalty(30000);
 		if (buzzedSilo.m_isBuzzedSiloDead)
 			return false;
 		buzzedSilo.kill();
@@ -377,6 +384,7 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 {		
 	bool collided = enforcePositions(plane, explodingSilo);
 	if (collided) {
+		this->m_game->addPenalty(30000);
 		plane.reset();
 		if (explodingSilo.m_isExplodingSiloDead)
 			return false;
@@ -399,6 +407,16 @@ bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explod
 		m_siloCount = m_siloCount--;		
 		if (m_siloCount < 1)
 			plane.killPlane();
+	}
+	return collided;
+}		
+
+/** NEW STUFF **/
+bool Ned3DObjectManager::interactBulletBuzzedSilo(BuzzedSiloObject &buzzedSilo, BulletObject &bullet)
+{
+	bool collided = bullet.checkForBoundingBoxCollision(&buzzedSilo);
+	if (collided){
+		this->m_game->addPenalty(10000);
 	}
 	return collided;
 }		
