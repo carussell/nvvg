@@ -44,8 +44,6 @@
 #include "BuzzedSiloObject.h"
 
 PlaneObject* gPlane;
-int siloCount = 0;
-
 
 Ned3DObjectManager::Ned3DObjectManager() :
   m_models(NULL),
@@ -56,7 +54,8 @@ Ned3DObjectManager::Ned3DObjectManager() :
   m_windmillModel(NULL),
   m_plane(NULL),
   m_terrain(NULL),
-  m_water(NULL)
+  m_water(NULL),
+  m_siloCount(0)
 {
 }
 
@@ -237,7 +236,7 @@ unsigned int Ned3DObjectManager::spawnSilo(const Vector3 &position, const EulerA
 {
   static const std::string silos[] = {"eSilo1","eSilo2","eSilo3","eSilo4", "gSilo1", "gSilo2", 
 										"gSilo3", "gSilo4", "bSilo1", "bSilo2"};
-  siloCount = siloCount++;
+  m_siloCount = m_siloCount++;
   unsigned int id = -1;
   static int whichSilo = 0;
   m_siloModel = m_models->getModelPointer(silos[whichSilo]); // Cache silo model
@@ -334,8 +333,8 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 	if (collided) {
 		buzzedSilo.kill();
 		//plane.reset();
-		siloCount--;		
-		if (siloCount < 1)
+		m_siloCount--;		
+		if (m_siloCount < 1)
 			plane.killPlane();
 	}
 	else {
@@ -343,8 +342,8 @@ bool Ned3DObjectManager::interactPlaneBuzzedSilo(PlaneObject &plane, BuzzedSiloO
 		if (buzzed){
 			//mark silo
 			buzzedSilo.kill();
-			siloCount = siloCount--;		
-			if (siloCount == 1)
+			m_siloCount = m_siloCount--;		
+			if (m_siloCount == 1)
 				plane.killPlane();
 		}
 	}
@@ -359,8 +358,8 @@ bool Ned3DObjectManager::interactPlaneGhostSilo(PlaneObject &plane, GhostSiloObj
 	bool collided = enforcePositions(plane, ghostSilo);
 	if (collided) {
 		ghostSilo.kill();
-		siloCount = siloCount--;		
-		if (siloCount == 1)
+		m_siloCount = m_siloCount--;		
+		if (m_siloCount == 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -373,8 +372,8 @@ bool Ned3DObjectManager::interactPlaneExplodingSilo(PlaneObject &plane, Explodin
 	if (collided) {
 		explodingSilo.kill();
 		//plane.reset();
-		siloCount = siloCount--;		
-		if (siloCount == 1)
+		m_siloCount = m_siloCount--;		
+		if (m_siloCount == 1)
 			plane.killPlane();
 	}
 	return collided;
@@ -386,8 +385,8 @@ bool Ned3DObjectManager::interactBulletExplodingSilo(ExplodingSiloObject &explod
 	bool collided = bullet.checkForBoundingBoxCollision(&explodingSilo);
 	if (collided){
 		explodingSilo.kill();	
-		siloCount = siloCount--;		
-		if (siloCount == 1)
+		m_siloCount = m_siloCount--;		
+		if (m_siloCount == 1)
 			plane.killPlane();
 	}
 	return collided;
