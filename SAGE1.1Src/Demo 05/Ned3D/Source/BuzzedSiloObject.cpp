@@ -42,7 +42,7 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
   this->m_allTextures[1] = "bcylo2.tga";
   for (int a =0; a < (int)m_allTextures.size(); a++)
     gRenderer.cacheTextureDX(m_allTextures[a].c_str());
-  //setting texture back to original exploding silo
+  //setting texture back to original buzzed silo
   setTexture(1);
 
 }
@@ -50,11 +50,13 @@ BuzzedSiloObject::BuzzedSiloObject(Model *m)
 void BuzzedSiloObject::kill(void)
 {
 	this->m_isBuzzedSiloDead = true;
+	//changing the texture to show user has buzzed it
 	tag();
 }
 
 void BuzzedSiloObject::tag(void)
 {
+	//sets texture to "buzzed"
 	setTexture(0);
 }
 
@@ -66,7 +68,7 @@ void BuzzedSiloObject::setTexture(int textNdx)
   if (textureIndex >= (int)m_allTextures.size())
     textureIndex = (int)m_allTextures.size() - 1;
   if (textureIndex < 0) textureIndex = 0;
-
+  //actually sets the textures to the new texture
   int numParts = m_pModel->getPartCount();
   for (int a = 0; a < numParts; a++)
     m_pModel->setPartTextureName(a,m_allTextures[textureIndex].c_str());

@@ -353,7 +353,7 @@ void PlaneObject::reset()
   m_eaOrient[0].identity();
   m_eaOrient[1].identity();
   m_fSpeed = 0.0f;
-  m_maxSpeed = 1.0f;
+  m_maxSpeed = 5.0f;
   m_turnState = TS_STRAIGHT;
   m_pitchState = PS_LEVEL;
   m_moveState = MS_STOP;

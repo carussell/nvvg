@@ -86,7 +86,7 @@ bool Game::consoleTimerReset(ParameterList* params, std::string* errorMessage)
 bool Game::consoleTimerPrint(ParameterList* params, std::string* errorMessage)
 {
 	std::string timeString;
-	gGame.timeToString(gGame.getTime() + 30000, timeString);
+	gGame.timeToString(gGame.getTime(), timeString);
 	gConsole.printLine(timeString);
 	return true;
 }
@@ -116,7 +116,7 @@ bool Game::initiate()
   // Set far clipping plane
   gRenderer.setNearFarClippingPlanes(1.0f,farClippingPlane);
 
-  objects = new Ned3DObjectManager();
+  objects = new Ned3DObjectManager(this);
   objects->setNumberOfDeadFrames(2);
   m_tetherCamera = new TetherCamera(objects);
 	
@@ -160,8 +160,8 @@ bool Game::initiate()
 	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
-		float rx = (float) (rand()%1280-640);
-		float rz = (float) (rand()%1280-640);
+		float rx = (float) (rand()%2560-1280);
+		float rz = (float) (rand()%2560-1280);
 		float th = terrain->getHeight(rx, rz);
 		if (th <= wh)
 			i--;
@@ -260,7 +260,7 @@ void Game::renderScreen()
     {
       int textY = gRenderer.getScreenY()/2;
       IRectangle rect = IRectangle(0,textY,gRenderer.getScreenX()-1, textY + 30);
-      gRenderer.drawText("Press \"Space Bar\" to Respawn",&rect, eTextAlignModeCenter, false);
+      gRenderer.drawText("Game Over.  Press \"Space Bar\" to try again!",&rect, eTextAlignModeCenter, false);
     }
   }
 
@@ -293,6 +293,12 @@ void Game::renderTime(void)
 	gRenderer.drawText(timeString.c_str(), &rect, eTextAlignModeRight, false);
 }
 
+void Game::newGame()
+{
+	shutdown();
+	initiate();
+}
+
 void Game::process()
 {
   float dt = gRenderer.getTimeStep();
@@ -321,7 +327,7 @@ void Game::process()
   if (gInput.keyJustUp(DIK_SPACE))
     if (objects->getPlaneObject()->isPlaneAlive() == false)
     {
-      resetGame();
+      newGame();
       return;
     } 
 
@@ -336,7 +342,11 @@ void Game::process()
     water->m_reflection.endReflectedScene();    
   }
 
+  if (objects->getSiloCount() < 1) {
+    objects->getPlaneObject()->killPlane();
+  }
 }
+
 
 void Game::resetGame()
 { 
@@ -354,8 +364,8 @@ void Game::resetGame()
 	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
-		float rx = (float) (rand()%1280-640);
-		float rz = (float) (rand()%1280-640);
+		float rx = (float) (rand()%2560-1280);
+		float rz = (float) (rand()%2560-1280);
 		float th = terrain->getHeight(rx, rz);
 		if (th <= wh)
 			i--;
@@ -430,10 +440,14 @@ bool Game::timeToString(long timeInMillis, std::string& timeString)
 	return true;
 }
 
-// Return the time in deciseconds.  That's right, deciseconds.
 void Game::resetTimer(void)
 {
 	this->m_timer = gRenderer.getTime();
+}
+
+void Game::addPenalty(long time)
+{
+	this->m_timePenalty += time;
 }
 
 /// This is used to help spawn objects.
