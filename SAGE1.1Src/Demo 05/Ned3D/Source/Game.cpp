@@ -215,6 +215,7 @@ bool Game::initiate()
   // Load console command comments from XML that are specific to NED3D
   gConsole.loadCommentsFromXml("nedConsoleDoc.xml");
 
+  this->resetTimer();
 	return true;
 }
 
