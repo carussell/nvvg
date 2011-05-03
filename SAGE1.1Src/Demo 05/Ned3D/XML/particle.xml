@@ -3,7 +3,7 @@
 <definitions>
 
   <system name="planeexplosion" numcopies="25" >
-    <effect name="fire1" particleCount="300" textureName="particle01.png">
+    <effect name="fire1" particleCount="900" textureName="particle01.png">
       <emit rate="90000" shape="solidsphere" />
       <cycle value="0" />
       <sort value="0" />
@@ -65,7 +65,7 @@
       <sort value="0" />
       <gravity value="0, 0, 0" />
       <position value="0, 5, 0" />
-      <particlelife value=".2" />
+      <particlelife value=".3" />
       <particlespeed value="90" />
       <particlecolor value="255, 240, 190, 110" />
       <particlesize value="7" />
@@ -78,7 +78,7 @@
       <sort value="0" />
       <gravity value="0, 0, 0" />
       <position value="0, 5, 0" />
-      <particlelife value=".3" />
+      <particlelife value=".5" />
       <particlespeed value="50" />
       <particlecolor value="255, 255, 100, 100" />
       <particlesize value="4" />
@@ -104,7 +104,7 @@
       <sort value="0" />
       <gravity value="0, -3, 0" />
       <position value="0, 5, 0" />
-      <particlelife value=".5" />
+      <particlelife value=".7" />
       <particlespeed value="80" />
       <particlecolor value="255, 255, 255, 0" />
       <particlesize value=".1" />
@@ -130,7 +130,7 @@
       <sort value="0" />
       <gravity value="0, 1, 0" />
       <position value="0, 5, 0" />
-      <particlelife value="5.0" />
+      <particlelife value="1.0" />
       <particlespeed value="8" />
       <particlecolor value="100, 40, 40, 40" />
       <particlesize value="2.5" />

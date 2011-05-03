@@ -34,7 +34,7 @@
 ExplodingSiloObject::ExplodingSiloObject(Model *m)
   : SiloObject(m),
   m_enginePosition(0,10.0f, 10.0f),//should be renamed to top and position changed
-  m_topPosition(0, 15.0f, 0.0f)
+  m_topPosition(0, 10.0f, 0.0f)
 {
   this->m_className = "ExplodingSilo";
   this->m_type = ObjectTypes::EXPLODINGSILO;

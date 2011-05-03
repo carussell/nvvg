@@ -132,7 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="directories.xml" />
-    <None Include="Xml\models.xml" />
+    <None Include="Xml\models.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Xml\nedConsoleDoc.xml" />
     <None Include="Xml\particle.xml" />
     <None Include="Xml\terrain.xml" />
