@@ -34,14 +34,14 @@
 ExplodingSiloObject::ExplodingSiloObject(Model *m)
   : SiloObject(m),
   m_enginePosition(0,10.0f, 10.0f),//should be renamed to top and position changed
-  m_topPosition(0, 10.0f, 9.0f)
+  m_topPosition(0, 15.0f, 0.0f)
 {
   this->m_className = "ExplodingSilo";
   this->m_type = ObjectTypes::EXPLODINGSILO;
   this->m_isExplodingSiloDead = false;
   this->m_smokeID = -1;
   this->m_allParticles.resize(2);
-  this->m_allParticles[0] = "planeexplosion";   // when hp = 0
+  this->m_allParticles[0] = "siloexplosion";   // when hp = 0
   this->m_allParticles[1] = "";             // hp > 2
   // load all textures that will be used on the plane.
   // Multiple textures are used throughout game play so the silos appear to
