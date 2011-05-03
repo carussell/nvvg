@@ -101,7 +101,7 @@ GameBase()
   objects = NULL;
 
   m_tetherCamera = NULL;
-  m_timer = gRenderer.getTime();
+  m_timeStart = gRenderer.getTime();
 }
 
 /// Game Initiate.
@@ -160,8 +160,8 @@ bool Game::initiate()
 	srand(gRenderer.getTime());
 	float wh = water->getWaterHeight();
 	for (int i=0; i< 10; i++){
-		float rx = (float) (rand()%2560-1280);
-		float rz = (float) (rand()%2560-1280);
+		float rx = (float) (rand()%1280-640);
+		float rz = (float) (rand()%1280-640);
 		float th = terrain->getHeight(rx, rz);
 		if (th <= wh)
 			i--;
@@ -258,9 +258,27 @@ void Game::renderScreen()
     
     if (plane->isPlaneAlive() == false)
     {
+	  std::string timeString, totalsMessage;
       int textY = gRenderer.getScreenY()/2;
-      IRectangle rect = IRectangle(0,textY,gRenderer.getScreenX()-1, textY + 30);
-      gRenderer.drawText("Game Over.  Press \"Space Bar\" to try again!",&rect, eTextAlignModeCenter, false);
+	  int right = gRenderer.getScreenX() - 1;
+      IRectangle newGameRect = IRectangle(0, textY, right, textY + 30);
+	  IRectangle scoreRect = IRectangle(0, textY + 30, right, textY + 120);
+
+      gRenderer.drawText("A winner is you.  Press N to start a new game.", &newGameRect, eTextAlignModeCenter, false);
+
+	  totalsMessage.append("Time: ");
+	  this->timeToString(this->getTime(), timeString);
+	  totalsMessage.append(timeString);
+
+	  totalsMessage.append("\nPenalty: ");
+	  this->timeToString(this->m_timePenalty, timeString);
+	  totalsMessage.append(timeString);
+	  
+	  totalsMessage.append("\nTotal: ");
+	  this->timeToString(this->getTime() + this->m_timePenalty, timeString);
+	  totalsMessage.append(timeString);
+
+	  gRenderer.drawText(totalsMessage.c_str(), &scoreRect, eTextAlignModeCenter, false);
     }
   }
 
@@ -324,7 +342,7 @@ void Game::process()
     gWindowsWrapper.quit();
 
   // If you press space bar after you die reset game
-  if (gInput.keyJustUp(DIK_SPACE))
+  if (gInput.keyJustUp(DIK_N))
     if (objects->getPlaneObject()->isPlaneAlive() == false)
     {
       newGame();
@@ -413,7 +431,10 @@ void Game::resetGame()
 
 long Game::getTime(void)
 {
-	return gRenderer.getTime() - this->m_timer;
+	if (objects->getPlaneObject()->isPlaneAlive()) {
+		this->m_timeCurrent = gRenderer.getTime();
+	}
+	return this->m_timeCurrent - this->m_timeStart;
 }
 
 // Returns false if timeInMillis is negative.  The reason it doesn't just take an unsigned
@@ -442,7 +463,7 @@ bool Game::timeToString(long timeInMillis, std::string& timeString)
 
 void Game::resetTimer(void)
 {
-	this->m_timer = gRenderer.getTime();
+	this->m_timeStart = gRenderer.getTime();
 }
 
 void Game::addPenalty(long time)

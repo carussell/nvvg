@@ -98,7 +98,8 @@ private:
   void renderTime(void);
 
   // Time in milliseconds.
-  long m_timer;
+  long m_timeStart;
+  long m_timeCurrent;
 
   long m_timePenalty;
 }; 
