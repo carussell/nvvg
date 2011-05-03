@@ -330,7 +330,7 @@ void PlaneObject::move(float dt)
 
   // Update propeller orientation
 
-  m_eaOrient[1].bank += kPi * dt * 4.0f;
+  m_eaOrient[1].bank += kPi * dt * 10.0f;
   
 
   // Move it
